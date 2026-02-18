@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexTools — Ferramentas Online Gratuitas e Premium</title>
+    <meta name="description" content="Suite de ferramentas online gratuitas: Gerador de QR Code, Gerador de Senhas, Contador de Palavras, Paleta de Cores e Formatador JSON. Rápido, seguro e sem cadastro.">
+    <meta name="keywords" content="ferramentas online, gerador qr code, gerador senha, contador palavras, paleta cores, formatador json, tools online">
+    <meta name="author" content="NexTools">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="NexTools — Ferramentas Online Gratuitas e Premium">
+    <meta property="og:description" content="5 ferramentas poderosas, gratuitas e sem cadastro. QR Code, Senhas, Contador, Paletas e JSON.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+            </a>
+            <nav class="nav">
+                <a href="#tools" class="nav-link">Ferramentas</a>
+                <a href="#pricing" class="nav-link">Preços</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </nav>
+            <a href="#pricing" class="btn btn-primary btn-sm">Upgrade Pro ✨</a>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="container hero-inner">
+            <div class="hero-badge">🚀 5 ferramentas gratuitas — sem cadastro</div>
+            <h1 class="hero-title">
+                Ferramentas online<br>
+                <span class="gradient-text">rápidas e poderosas</span>
+            </h1>
+            <p class="hero-subtitle">
+                QR Codes, senhas seguras, contagem de palavras, paletas de cores e formatação JSON — tudo em um só lugar, grátis.
+            </p>
+            <a href="#tools" class="btn btn-primary btn-lg">
+                Começar agora
+                <span class="btn-arrow">→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== AD BANNER TOP ===== -->
+    <div class="ad-slot" id="ad-top">
+        <div class="ad-placeholder">
+            <span>Anúncio — <a href="https://www.google.com/adsense" target="_blank">Google AdSense</a></span>
+        </div>
+    </div>
+
+    <!-- ===== TOOLS SECTION ===== -->
+    <section class="tools-section" id="tools">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nossas <span class="gradient-text">Ferramentas</span></h2>
+                <p class="section-subtitle">Selecione uma ferramenta abaixo para começar</p>
+            </div>
+
+            <!-- Tool Navigation Tabs -->
+            <div class="tool-tabs">
+                <button class="tool-tab active" data-tool="qrcode">
+                    <span class="tool-tab-icon">📱</span>
+                    <span class="tool-tab-label">QR Code</span>
+                </button>
+                <button class="tool-tab" data-tool="password">
+                    <span class="tool-tab-icon">🔐</span>
+                    <span class="tool-tab-label">Senhas</span>
+                </button>
+                <button class="tool-tab" data-tool="wordcount">
+                    <span class="tool-tab-icon">📝</span>
+                    <span class="tool-tab-label">Contador</span>
+                </button>
+                <button class="tool-tab" data-tool="palette">
+                    <span class="tool-tab-icon">🎨</span>
+                    <span class="tool-tab-label">Paleta</span>
+                </button>
+                <button class="tool-tab" data-tool="json">
+                    <span class="tool-tab-icon">{ }</span>
+                    <span class="tool-tab-label">JSON</span>
+                </button>
+            </div>
+
+            <!-- Tool Panels -->
+            <div class="tool-panels">
+
+                <!-- QR Code Generator -->
+                <div class="tool-panel active" id="panel-qrcode">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Gerador de QR Code</h3>
+                            <p>Transforme qualquer texto ou URL em um QR Code pronto para download</p>
+                        </div>
+                        <div class="tool-card-body">
+                            <div class="tool-row">
+                                <div class="tool-input-group">
+                                    <label for="qr-input">Texto ou URL</label>
+                                    <input type="text" id="qr-input" class="input" placeholder="https://seusite.com" />
+                                    <div class="input-row">
+                                        <div class="input-group-small">
+                                            <label for="qr-size">Tamanho</label>
+                                            <select id="qr-size" class="input">
+                                                <option value="128">128px</option>
+                                                <option value="256" selected>256px</option>
+                                                <option value="512">512px</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group-small">
+                                            <label for="qr-color">Cor</label>
+                                            <input type="color" id="qr-color" class="input-color" value="#ffffff" />
+                                        </div>
+                                        <div class="input-group-small">
+                                            <label for="qr-bg">Fundo</label>
+                                            <input type="color" id="qr-bg" class="input-color" value="#0a0a1a" />
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" id="qr-generate">Gerar QR Code</button>
+                                </div>
+                                <div class="tool-output-group">
+                                    <div class="qr-preview" id="qr-preview">
+                                        <span class="preview-placeholder">Seu QR Code aparecerá aqui</span>
+                                    </div>
+                                    <button class="btn btn-secondary" id="qr-download" disabled>⬇ Download PNG</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password Generator -->
+                <div class="tool-panel" id="panel-password">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Gerador de Senhas Seguras</h3>
+                            <p>Crie senhas fortes e aleatórias para proteger suas contas</p>
+                        </div>
+                        <div class="tool-card-body">
+                            <div class="password-output-wrap">
+                                <input type="text" id="password-output" class="input password-display" readonly value="Clique em gerar..." />
+                                <button class="btn-icon" id="password-copy" title="Copiar">📋</button>
+                            </div>
+                            <div class="password-strength" id="password-strength">
+                                <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+                                <span class="strength-label" id="strength-label">—</span>
+                            </div>
+                            <div class="password-options">
+                                <div class="option-row">
+                                    <label for="pw-length">Comprimento: <strong id="pw-length-val">16</strong></label>
+                                    <input type="range" id="pw-length" min="4" max="64" value="16" class="range-input" />
+                                </div>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="pw-upper" checked /> Maiúsculas (A-Z)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="pw-lower" checked /> Minúsculas (a-z)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="pw-numbers" checked /> Números (0-9)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="pw-symbols" checked /> Símbolos (!@#$)
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" id="password-generate">🔄 Gerar Nova Senha</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Word Counter -->
+                <div class="tool-panel" id="panel-wordcount">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Contador de Palavras e Caracteres</h3>
+                            <p>Analise seu texto com estatísticas detalhadas em tempo real</p>
+                        </div>
+                        <div class="tool-card-body">
+                            <textarea id="wc-input" class="input textarea" rows="8" placeholder="Cole ou digite seu texto aqui..."></textarea>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <span class="stat-value" id="stat-words">0</span>
+                                    <span class="stat-label">Palavras</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="stat-chars">0</span>
+                                    <span class="stat-label">Caracteres</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="stat-chars-no-space">0</span>
+                                    <span class="stat-label">Sem espaços</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="stat-sentences">0</span>
+                                    <span class="stat-label">Frases</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="stat-paragraphs">0</span>
+                                    <span class="stat-label">Parágrafos</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="stat-reading">0s</span>
+                                    <span class="stat-label">Tempo leitura</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color Palette -->
+                <div class="tool-panel" id="panel-palette">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Gerador de Paleta de Cores</h3>
+                            <p>Crie paletas de cores harmoniosas para seus projetos</p>
+                        </div>
+                        <div class="tool-card-body">
+                            <div class="palette-controls">
+                                <div class="input-group-small">
+                                    <label for="palette-mode">Modo</label>
+                                    <select id="palette-mode" class="input">
+                                        <option value="random">Aleatório</option>
+                                        <option value="analogous">Análogo</option>
+                                        <option value="complementary">Complementar</option>
+                                        <option value="triadic">Triádico</option>
+                                        <option value="monochromatic">Monocromático</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" id="palette-generate">🎲 Gerar Paleta</button>
+                            </div>
+                            <div class="palette-display" id="palette-display">
+                                <!-- Colors will be generated here -->
+                            </div>
+                            <p class="palette-hint">Clique em uma cor para copiar o código HEX</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON Formatter -->
+                <div class="tool-panel" id="panel-json">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Formatador e Validador JSON</h3>
+                            <p>Formate, valide e minifique seus dados JSON instantaneamente</p>
+                        </div>
+                        <div class="tool-card-body">
+                            <div class="json-layout">
+                                <div class="json-col">
+                                    <label>Entrada</label>
+                                    <textarea id="json-input" class="input textarea code-textarea" rows="12" placeholder='{"nome": "NexTools", "versao": 1}'></textarea>
+                                </div>
+                                <div class="json-col">
+                                    <label>Saída</label>
+                                    <pre id="json-output" class="json-output-pre"><code>A saída formatada aparecerá aqui...</code></pre>
+                                </div>
+                            </div>
+                            <div class="json-status" id="json-status"></div>
+                            <div class="json-actions">
+                                <button class="btn btn-primary" id="json-format">Formatar</button>
+                                <button class="btn btn-secondary" id="json-minify">Minificar</button>
+                                <button class="btn btn-secondary" id="json-validate">Validar</button>
+                                <button class="btn btn-secondary" id="json-copy">📋 Copiar Saída</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AD BANNER MIDDLE ===== -->
+    <div class="ad-slot" id="ad-middle">
+        <div class="ad-placeholder">
+            <span>Anúncio — <a href="https://www.google.com/adsense" target="_blank">Google AdSense</a></span>
+        </div>
+    </div>
+
+    <!-- ===== PRICING ===== -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Planos <span class="gradient-text">Simples</span></h2>
+                <p class="section-subtitle">Comece grátis, faça upgrade quando precisar</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <span class="pricing-tier">Grátis</span>
+                        <div class="pricing-price">R$0<span>/mês</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ Todas as 5 ferramentas</li>
+                        <li>✅ Uso ilimitado</li>
+                        <li>✅ Sem cadastro</li>
+                        <li>❌ Contém anúncios</li>
+                        <li>❌ Sem operações em lote</li>
+                        <li>❌ Sem acesso à API</li>
+                    </ul>
+                    <a href="#tools" class="btn btn-secondary btn-block">Usar Grátis</a>
+                </div>
+                <div class="pricing-card pricing-card-featured">
+                    <div class="pricing-badge">Mais Popular</div>
+                    <div class="pricing-card-header">
+                        <span class="pricing-tier">Pro</span>
+                        <div class="pricing-price">R$19<span>/mês</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ Todas as 5 ferramentas</li>
+                        <li>✅ Uso ilimitado</li>
+                        <li>✅ <strong>Zero anúncios</strong></li>
+                        <li>✅ <strong>Operações em lote</strong></li>
+                        <li>✅ <strong>Acesso à API</strong></li>
+                        <li>✅ <strong>Suporte prioritário</strong></li>
+                    </ul>
+                    <a href="#" class="btn btn-primary btn-block">Começar Pro ✨</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Perguntas <span class="gradient-text">Frequentes</span></h2>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary class="faq-question">As ferramentas são realmente gratuitas?</summary>
+                    <p class="faq-answer">Sim! Todas as 5 ferramentas são 100% gratuitas e sem limite de uso. O plano Pro apenas remove anúncios e adiciona features avançadas.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Meus dados são seguros?</summary>
+                    <p class="faq-answer">Absolutamente. Todo o processamento acontece localmente no seu navegador. Nenhum dado é enviado para servidores externos.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Preciso criar uma conta?</summary>
+                    <p class="faq-answer">Não! Você pode usar todas as ferramentas gratuitas sem cadastro. Apenas o plano Pro requer uma conta.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Posso usar no celular?</summary>
+                    <p class="faq-answer">Sim! O NexTools é totalmente responsivo e funciona perfeitamente em dispositivos móveis, tablets e desktops.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+                <p class="footer-tagline">Ferramentas online rápidas e poderosas.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#tools">Ferramentas</a>
+                <a href="#pricing">Preços</a>
+                <a href="#faq">FAQ</a>
+                <a href="#">Termos</a>
+                <a href="#">Privacidade</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-message">Copiado!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
