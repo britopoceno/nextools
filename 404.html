@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Página não encontrada | NexTools</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .error-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .error-text {
+            color: var(--text-secondary);
+            max-width: 400px;
+            margin-bottom: 32px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-page">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Ops! Página não encontrada</h1>
+        <p class="error-text">Parece que a ferramenta que você está procurando foi movida ou não existe mais.</p>
+        <a href="index.html" class="btn btn-primary btn-lg">Voltar ao Início</a>
+    </div>
+</body>
+
+</html>

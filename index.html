@@ -27,6 +27,7 @@
     <!-- QR Code Library -->
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -39,12 +40,20 @@
                 <span class="logo-icon">⚡</span>
                 <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
             </a>
-            <nav class="nav">
+            <nav class="nav" id="main-nav">
                 <a href="#tools" class="nav-link">Ferramentas</a>
                 <a href="#pricing" class="nav-link">Preços</a>
                 <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#pricing" class="btn btn-primary btn-sm mobile-only">Upgrade Pro ✨</a>
             </nav>
-            <a href="#pricing" class="btn btn-primary btn-sm">Upgrade Pro ✨</a>
+            <div class="header-actions">
+                <a href="#pricing" class="btn btn-primary btn-sm desktop-only">Upgrade Pro ✨</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
 
