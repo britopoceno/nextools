@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nextools.com.br/sitemap.xml

@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexTools — Ferramentas Online Gratuitas e Premium</title>
-    <meta name="description" content="Suite de ferramentas online gratuitas: Gerador de QR Code, Gerador de Senhas, Contador de Palavras, Paleta de Cores e Formatador JSON. Rápido, seguro e sem cadastro.">
-    <meta name="keywords" content="ferramentas online, gerador qr code, gerador senha, contador palavras, paleta cores, formatador json, tools online">
+    <meta name="description"
+        content="Suite de ferramentas online gratuitas: Gerador de QR Code, Gerador de Senhas, Contador de Palavras, Paleta de Cores e Formatador JSON. Rápido, seguro e sem cadastro.">
+    <meta name="keywords"
+        content="ferramentas online, gerador qr code, gerador senha, contador palavras, paleta cores, formatador json, tools online">
     <meta name="author" content="NexTools">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph -->
     <meta property="og:title" content="NexTools — Ferramentas Online Gratuitas e Premium">
-    <meta property="og:description" content="5 ferramentas poderosas, gratuitas e sem cadastro. QR Code, Senhas, Contador, Paletas e JSON.">
+    <meta property="og:description"
+        content="5 ferramentas poderosas, gratuitas e sem cadastro. QR Code, Senhas, Contador, Paletas e JSON.">
     <meta property="og:type" content="website">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- QR Code Library -->
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
     <!-- ===== HEADER ===== -->
@@ -52,7 +58,8 @@
                 <span class="gradient-text">rápidas e poderosas</span>
             </h1>
             <p class="hero-subtitle">
-                QR Codes, senhas seguras, contagem de palavras, paletas de cores e formatação JSON — tudo em um só lugar, grátis.
+                QR Codes, senhas seguras, contagem de palavras, paletas de cores e formatação JSON — tudo em um só
+                lugar, grátis.
             </p>
             <a href="#tools" class="btn btn-primary btn-lg">
                 Começar agora
@@ -155,17 +162,21 @@
                         </div>
                         <div class="tool-card-body">
                             <div class="password-output-wrap">
-                                <input type="text" id="password-output" class="input password-display" readonly value="Clique em gerar..." />
+                                <input type="text" id="password-output" class="input password-display" readonly
+                                    value="Clique em gerar..." />
                                 <button class="btn-icon" id="password-copy" title="Copiar">📋</button>
                             </div>
                             <div class="password-strength" id="password-strength">
-                                <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="strength-fill"></div>
+                                </div>
                                 <span class="strength-label" id="strength-label">—</span>
                             </div>
                             <div class="password-options">
                                 <div class="option-row">
                                     <label for="pw-length">Comprimento: <strong id="pw-length-val">16</strong></label>
-                                    <input type="range" id="pw-length" min="4" max="64" value="16" class="range-input" />
+                                    <input type="range" id="pw-length" min="4" max="64" value="16"
+                                        class="range-input" />
                                 </div>
                                 <div class="checkbox-grid">
                                     <label class="checkbox-label">
@@ -195,7 +206,8 @@
                             <p>Analise seu texto com estatísticas detalhadas em tempo real</p>
                         </div>
                         <div class="tool-card-body">
-                            <textarea id="wc-input" class="input textarea" rows="8" placeholder="Cole ou digite seu texto aqui..."></textarea>
+                            <textarea id="wc-input" class="input textarea" rows="8"
+                                placeholder="Cole ou digite seu texto aqui..."></textarea>
                             <div class="stats-grid">
                                 <div class="stat-card">
                                     <span class="stat-value" id="stat-words">0</span>
@@ -266,11 +278,13 @@
                             <div class="json-layout">
                                 <div class="json-col">
                                     <label>Entrada</label>
-                                    <textarea id="json-input" class="input textarea code-textarea" rows="12" placeholder='{"nome": "NexTools", "versao": 1}'></textarea>
+                                    <textarea id="json-input" class="input textarea code-textarea" rows="12"
+                                        placeholder='{"nome": "NexTools", "versao": 1}'></textarea>
                                 </div>
                                 <div class="json-col">
                                     <label>Saída</label>
-                                    <pre id="json-output" class="json-output-pre"><code>A saída formatada aparecerá aqui...</code></pre>
+                                    <pre id="json-output"
+                                        class="json-output-pre"><code>A saída formatada aparecerá aqui...</code></pre>
                                 </div>
                             </div>
                             <div class="json-status" id="json-status"></div>
@@ -346,19 +360,23 @@
             <div class="faq-list">
                 <details class="faq-item">
                     <summary class="faq-question">As ferramentas são realmente gratuitas?</summary>
-                    <p class="faq-answer">Sim! Todas as 5 ferramentas são 100% gratuitas e sem limite de uso. O plano Pro apenas remove anúncios e adiciona features avançadas.</p>
+                    <p class="faq-answer">Sim! Todas as 5 ferramentas são 100% gratuitas e sem limite de uso. O plano
+                        Pro apenas remove anúncios e adiciona features avançadas.</p>
                 </details>
                 <details class="faq-item">
                     <summary class="faq-question">Meus dados são seguros?</summary>
-                    <p class="faq-answer">Absolutamente. Todo o processamento acontece localmente no seu navegador. Nenhum dado é enviado para servidores externos.</p>
+                    <p class="faq-answer">Absolutamente. Todo o processamento acontece localmente no seu navegador.
+                        Nenhum dado é enviado para servidores externos.</p>
                 </details>
                 <details class="faq-item">
                     <summary class="faq-question">Preciso criar uma conta?</summary>
-                    <p class="faq-answer">Não! Você pode usar todas as ferramentas gratuitas sem cadastro. Apenas o plano Pro requer uma conta.</p>
+                    <p class="faq-answer">Não! Você pode usar todas as ferramentas gratuitas sem cadastro. Apenas o
+                        plano Pro requer uma conta.</p>
                 </details>
                 <details class="faq-item">
                     <summary class="faq-question">Posso usar no celular?</summary>
-                    <p class="faq-answer">Sim! O NexTools é totalmente responsivo e funciona perfeitamente em dispositivos móveis, tablets e desktops.</p>
+                    <p class="faq-answer">Sim! O NexTools é totalmente responsivo e funciona perfeitamente em
+                        dispositivos móveis, tablets e desktops.</p>
                 </details>
             </div>
         </div>
@@ -376,8 +394,8 @@
                 <a href="#tools">Ferramentas</a>
                 <a href="#pricing">Preços</a>
                 <a href="#faq">FAQ</a>
+                <a href="privacidade.html">Privacidade</a>
                 <a href="#">Termos</a>
-                <a href="#">Privacidade</a>
             </div>
             <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
         </div>
@@ -390,4 +408,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
