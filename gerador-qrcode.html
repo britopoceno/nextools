@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de QR Code Grátis — NexTools</title>
+    <meta name="description"
+        content="Crie QR Codes personalizados gratuitamente. Converta textos, links e URLs em códigos QR prontos para baixar em PNG.">
+    <meta name="keywords"
+        content="gerador qr code, criar qrcode, qr code grátis, gerar qr code png, nextools">
+    <meta name="author" content="NexTools">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gerador de QR Code Grátis — NexTools">
+    <meta property="og:description"
+        content="Converta textos, links e URLs em códigos QR prontos para baixar em PNG.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5750194644744805"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html#tools" class="nav-link">Ferramentas</a>
+                <a href="index.html#pricing" class="nav-link">Preços</a>
+                <a href="index.html#faq" class="nav-link">FAQ</a>
+                <a href="index.html#pricing" class="btn btn-primary btn-sm mobile-only">Upgrade Pro ✨</a>
+            </nav>
+            <div class="header-actions">
+                <a href="index.html#pricing" class="btn btn-primary btn-sm desktop-only">Upgrade Pro ✨</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="container breadcrumb" style="padding-top: 100px; padding-bottom: 20px;">
+        <a href="index.html" style="color: var(--accent-2); text-decoration: none;">← Voltar para Ferramentas</a>
+    </div>
+
+    <!-- ===== TOOL SECTION ===== -->
+    <section class="tools-section" id="tools" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Gerador de <span class="gradient-text">QR Code</span></h1>
+            </div>
+
+            <div class="tool-panels">
+                <div class="tool-panel active" id="panel-qrcode">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Gerar QR Code</h3>
+                            <p>Transforme qualquer texto ou URL em um QR Code pronto para download</p>
+                        </div>
+                        <div class="tool-card-body">
+                            <div class="tool-row">
+                                <div class="tool-input-group">
+                                    <label for="qr-input">Texto ou URL</label>
+                                    <input type="text" id="qr-input" class="input" placeholder="https://seusite.com" />
+                                    <div class="input-row">
+                                        <div class="input-group-small">
+                                            <label for="qr-size">Tamanho</label>
+                                            <select id="qr-size" class="input">
+                                                <option value="128">128px</option>
+                                                <option value="256" selected>256px</option>
+                                                <option value="512">512px</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group-small">
+                                            <label for="qr-color">Cor</label>
+                                            <input type="color" id="qr-color" class="input-color" value="#ffffff" />
+                                        </div>
+                                        <div class="input-group-small">
+                                            <label for="qr-bg">Fundo</label>
+                                            <input type="color" id="qr-bg" class="input-color" value="#0a0a1a" />
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" id="qr-generate">Gerar QR Code</button>
+                                </div>
+                                <div class="tool-output-group">
+                                    <div class="qr-preview" id="qr-preview">
+                                        <span class="preview-placeholder">Seu QR Code aparecerá aqui</span>
+                                    </div>
+                                    <button class="btn btn-secondary" id="qr-download" disabled>⬇ Download PNG</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AD BANNER MIDDLE ===== -->
+    <div class="ad-slot" id="ad-middle">
+        <div class="ad-placeholder">
+            <span>Anúncio — <a href="https://www.google.com/adsense" target="_blank">Google AdSense</a></span>
+        </div>
+    </div>
+
+    <!-- ===== CONTENT SECTION (SEO & AdSense) ===== -->
+    <section class="content-section">
+        <div class="container" style="max-width: 800px; padding: 40px 0; color: var(--text-secondary); line-height: 1.6;">
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">O que é um QR Code?</h2>
+            <p style="margin-bottom: 20px;">QR Code (Quick Response Code) é um código de barras bidimensional que pode ser facilmente lido usando a maioria dos telefones celulares equipados com câmera. Ele é frequentemente usado para fornecer acesso rápido a sites, números de telefone, mensagens de texto ou dados de contato. Criado originalmente no Japão pela Denso Wave em 1994 para rastrear peças na fabricação de veículos, seu uso se expandiu significativamente para o marketing voltado para o consumidor e o compartilhamento de informações.</p>
+            
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">Como usar o nosso Gerador de QR Code?</h2>
+            <p style="margin-bottom: 20px;">Criar um QR Code na NexTools é simples, rápido e totalmente gratuito, sem necessidade de criar nenhum tipo de cadastro:</p>
+            <ol style="margin-left: 20px; margin-bottom: 20px;">
+                <li style="margin-bottom: 10px;"><strong>Insira o Conteúdo:</strong> No campo "Texto ou URL", cole o link do seu site, o seu número do WhatsApp (ex: wa.me/seunumero) ou qualquer texto que desejar.</li>
+                <li style="margin-bottom: 10px;"><strong>Personalize o Tamanho e as Cores (Opcional):</strong> Escolha o tamanho em pixels (128px, 256px ou 512px) e ajuste a cor principal e a cor de fundo para combinar com a sua marca. Mantenha um bom contraste para garantir que a câmera consiga ler o código.</li>
+                <li style="margin-bottom: 10px;"><strong>Gere o Código:</strong> Clique em "Gerar QR Code".</li>
+                <li style="margin-bottom: 10px;"><strong>Faça o Download:</strong> Clique em "Download PNG" e utilize a imagem onde preferir — panfletos, cartões de visita, sites, etc.</li>
+            </ol>
+
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">Por que usar QR Codes?</h2>
+            <p style="margin-bottom: 20px;">Os QR Codes facilitam muito a conexão entre o mundo online e offline (como materiais impressos). Utilizar nosso gerador de códigos QR permite direcionar usuários rapidamente, sem a chance deles cometerem erros ao digitar o endereço do seu site. São ideais para usar em menus digitais de restaurantes, convites de casamento, credenciais em eventos e muito mais.</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+                <p class="footer-tagline">Ferramentas online rápidas e poderosas.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#tools">Ferramentas</a>
+                <a href="index.html#pricing">Preços</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="termos.html">Termos</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-message">Copiado!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

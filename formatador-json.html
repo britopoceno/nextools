@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatador e Validador JSON Grátis — NexTools</title>
+    <meta name="description"
+        content="Formate, embeleze (beautify), valide e minifique textos e arquivos de dados JSON instantaneamente no navegador. Gratuito para desenvolvedores.">
+    <meta name="keywords"
+        content="formatar json, beautify json, validar json, formato json online, json minifier, nextools">
+    <meta name="author" content="NexTools">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Formatador e Validador JSON Grátis — NexTools">
+    <meta property="og:description" content="Formate, valide e minifique dados JSON instantaneamente no navegador.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5750194644744805"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html#tools" class="nav-link">Ferramentas</a>
+                <a href="index.html#pricing" class="nav-link">Preços</a>
+                <a href="index.html#faq" class="nav-link">FAQ</a>
+                <a href="index.html#pricing" class="btn btn-primary btn-sm mobile-only">Upgrade Pro ✨</a>
+            </nav>
+            <div class="header-actions">
+                <a href="index.html#pricing" class="btn btn-primary btn-sm desktop-only">Upgrade Pro ✨</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="container breadcrumb" style="padding-top: 100px; padding-bottom: 20px;">
+        <a href="index.html" style="color: var(--accent-2); text-decoration: none;">← Voltar para Ferramentas</a>
+    </div>
+
+    <!-- ===== TOOL SECTION ===== -->
+    <section class="tools-section" id="tools" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Formatador <span class="gradient-text">JSON</span></h1>
+            </div>
+
+            <div class="tool-panels">
+                <div class="tool-panel active" id="panel-json">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Validar JSON</h3>
+                            <p>Formate, valide e minifique seus dados JSON instantaneamente</p>
+                        </div>
+                        <div class="tool-card-body">
+                            <div class="json-layout">
+                                <div class="json-col">
+                                    <label>Entrada (Input)</label>
+                                    <textarea id="json-input" class="input textarea code-textarea" rows="12"
+                                        placeholder='{"nome": "NexTools", "versao": 1}'></textarea>
+                                </div>
+                                <div class="json-col">
+                                    <label>Saída (Output) Formatada</label>
+                                    <pre id="json-output"
+                                        class="json-output-pre"><code>A saída formatada aparecerá aqui...</code></pre>
+                                </div>
+                            </div>
+                            <div class="json-status" id="json-status"></div>
+                            <div class="json-actions">
+                                <button class="btn btn-primary" id="json-format">Formatar</button>
+                                <button class="btn btn-secondary" id="json-minify">Minificar</button>
+                                <button class="btn btn-secondary" id="json-validate">Validar</button>
+                                <button class="btn btn-secondary" id="json-copy">📋 Copiar Saída</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AD BANNER MIDDLE ===== -->
+    <div class="ad-slot" id="ad-middle">
+        <div class="ad-placeholder">
+            <span>Anúncio — <a href="https://www.google.com/adsense" target="_blank">Google AdSense</a></span>
+        </div>
+    </div>
+
+    <!-- ===== CONTENT SECTION (SEO & AdSense) ===== -->
+    <section class="content-section">
+        <div class="container"
+            style="max-width: 800px; padding: 40px 0; color: var(--text-secondary); line-height: 1.6;">
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">A importância de padronizar o JSON</h2>
+            <p style="margin-bottom: 20px;">O JSON (JavaScript Object Notation) é o modelo preferido dos engenheiros e
+                desenvolvedores para armazenamento e troca textual de informações entre servidores, banco de dados ou
+                sistemas web que utilizam o conceito de Rest API para a sua comunicação principal externa.</p>
+
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">Beautifier e Identação com um clique</h2>
+            <p style="margin-bottom: 20px;">Quando o retorno do pedido chega a nível de aplicação, em sua maioria — para
+                preservar a banda da conexão computacional — é enviado num imenso bloco inteiramente comprimido que um
+                ser humano seria incapaz de revisar confortavelmente. Com o auxílio desta ferramenta interativa
+                "Formatador YAML/JSON" você será guiado a converter os conjuntos imensuráveis de textos contínuos numa
+                cascata em formato em árvore visual, introduzindo tabs ordenados à medida que os arrays se abrem,
+                colorindo os elementos falsos (booleanos, nulls, numéricos ou strings) das chaves proprietárias. Uma
+                visualização muito mais orgânica e natural.</p>
+
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">Identificação de erros e minificação de peso</h2>
+            <p style="margin-bottom: 20px;">Um formato quebrado com chaves faltando inviabilizará seu projeto front end
+                ou back end do funcionamento autônomo. O utilitário da NexTools avalia e valida se o seu formulário está
+                de acordo com as especificações exigidas pelas conformidades mundiais de manipulação de string em JSON e
+                aponta se sua validação foi comprometida. Logo em seguida, você será capacitado à função irreversível
+                mas benéfica de "Minificar", extraindo todos os vãos desnecessários brancos de formatação sem
+                comprometer em nada o resultado, otimizando seu ambiente para a publicação do projeto ao cliente final
+                de forma super leve e acessível.</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+                <p class="footer-tagline">Ferramentas online rápidas e poderosas.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#tools">Ferramentas</a>
+                <a href="index.html#pricing">Preços</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="termos.html">Termos</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-message">Copiado!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas Seguras Online — NexTools</title>
+    <meta name="description"
+        content="Crie senhas fortes e aleatórias instantaneamente. Proteja suas contas contra hackers e vazamentos com uma senha altamente segura. Totalmente grátis.">
+    <meta name="keywords"
+        content="gerador de senhas, criar senha forte, senha aleatória grátis, gerar senha segura, nextools">
+    <meta name="author" content="NexTools">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gerador de Senhas Seguras Online — NexTools">
+    <meta property="og:description"
+        content="Crie senhas fortes e aleatórias instantaneamente. Proteja suas contas contra hackers e vazamentos.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5750194644744805"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html#tools" class="nav-link">Ferramentas</a>
+                <a href="index.html#pricing" class="nav-link">Preços</a>
+                <a href="index.html#faq" class="nav-link">FAQ</a>
+                <a href="index.html#pricing" class="btn btn-primary btn-sm mobile-only">Upgrade Pro ✨</a>
+            </nav>
+            <div class="header-actions">
+                <a href="index.html#pricing" class="btn btn-primary btn-sm desktop-only">Upgrade Pro ✨</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="container breadcrumb" style="padding-top: 100px; padding-bottom: 20px;">
+        <a href="index.html" style="color: var(--accent-2); text-decoration: none;">← Voltar para Ferramentas</a>
+    </div>
+
+    <!-- ===== TOOL SECTION ===== -->
+    <section class="tools-section" id="tools" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Gerador de <span class="gradient-text">Senhas</span></h1>
+            </div>
+
+            <div class="tool-panels">
+                <div class="tool-panel active" id="panel-password">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Gerar Senhas</h3>
+                            <p>Crie senhas fortes e aleatórias para proteger suas contas</p>
+                        </div>
+                        <div class="tool-card-body">
+                            <div class="password-output-wrap">
+                                <input type="text" id="password-output" class="input password-display" readonly
+                                    value="Clique em gerar..." />
+                                <button class="btn-icon" id="password-copy" title="Copiar">📋</button>
+                            </div>
+                            <div class="password-strength" id="password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="strength-fill"></div>
+                                </div>
+                                <span class="strength-label" id="strength-label">—</span>
+                            </div>
+                            <div class="password-options">
+                                <div class="option-row">
+                                    <label for="pw-length">Comprimento: <strong id="pw-length-val">16</strong></label>
+                                    <input type="range" id="pw-length" min="4" max="64" value="16"
+                                        class="range-input" />
+                                </div>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="pw-upper" checked /> Maiúsculas (A-Z)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="pw-lower" checked /> Minúsculas (a-z)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="pw-numbers" checked /> Números (0-9)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="pw-symbols" checked /> Símbolos (!@#$)
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" id="password-generate">🔄 Gerar Nova Senha</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AD BANNER MIDDLE ===== -->
+    <div class="ad-slot" id="ad-middle">
+        <div class="ad-placeholder">
+            <span>Anúncio — <a href="https://www.google.com/adsense" target="_blank">Google AdSense</a></span>
+        </div>
+    </div>
+
+    <!-- ===== CONTENT SECTION (SEO & AdSense) ===== -->
+    <section class="content-section">
+        <div class="container"
+            style="max-width: 800px; padding: 40px 0; color: var(--text-secondary); line-height: 1.6;">
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">O que é uma senha forte?</h2>
+            <p style="margin-bottom: 20px;">Uma senha forte é a sua primeira e principal linha de defesa contra invasões
+                de contas e roubo de identidade. Cada vez mais vemos casos de vazamentos de senhas de grandes empresas
+                que resultam em milhões de contas comprometidas. Se você utiliza a mesma senha para vários serviços
+                diferentes — principalmente serviços críticos como seu banco de dados ou e-mail pessoal — as suas
+                informações estão em sério risco. Uma verdadeira senha forte deve ter as seguintes propriedades
+                principais:</p>
+            <ul style="margin-left: 20px; margin-bottom: 20px;">
+                <li style="margin-bottom: 10px;">No mínimo 12-16 caracteres. Longas frases senhas muitas vezes são mais
+                    seguras que palavras curtas ou símbolos aleatórios curtos.</li>
+                <li style="margin-bottom: 10px;">Ser completamente única para cada conta, de modo que se uma conta
+                    vazar, as outras continuem seguras.</li>
+                <li style="margin-bottom: 10px;">Conter uma combinação de letras maiúsculas e minúsculas, números e
+                    símbolos especiais, caso permitido pelo site.</li>
+                <li style="margin-bottom: 10px;">Não conter nomes próprios, aniversários de membros da família, palavras
+                    do dicionário comuns ou informações presentes em suas redes sociais.</li>
+            </ul>
+
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">Por que gerar senhas aleatórias?</h2>
+            <p style="margin-bottom: 20px;">Muitas violações de dados são na verdade devidas ao fato das senhas criadas
+                pelas pessoas não serem verdadeiramente aleatórias. Se as invenções das suas senhas não possuem a
+                complexidade necessária, programas de força-bruta (brute-force) que disparam milhares de vezes por
+                milissegundo as quebrarão facilmente através de dicionários. Utilizar o nosso <b>gerador de senhas
+                    seguras</b> cria senhas perfeitamente randômicas baseadas na mais pura aleatoriedade dos
+                processamentos computacionais do seu navegador, deixando até mesmo supercomputadores com dificuldade
+                para quebrar as credenciais geradas pela NexTools.</p>
+
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">Este gerador de senhas é seguro?</h2>
+            <p style="margin-bottom: 20px;">Totalmente. O nosso sistema não manda nenhuma das suas escolhas para o
+                servidor da NexTools nem armazena o que está sendo gerado na tela. Todo processo desta ferramenta
+                utiliza o seu próprio navegador (Google Chrome, Firefox, Safari) para computar localmente a sua próxima
+                senha em milissegundos. É altamente sugerido que após copiar sua senha, você faça uso de algum
+                utilitário gerenciador de senhas confiável.</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+                <p class="footer-tagline">Ferramentas online rápidas e poderosas.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#tools">Ferramentas</a>
+                <a href="index.html#pricing">Preços</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="termos.html">Termos</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-message">Copiado!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

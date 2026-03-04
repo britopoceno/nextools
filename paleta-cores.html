@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Paleta de Cores — NexTools</title>
+    <meta name="description"
+        content="Crie paletas de cores e esquemas de cores harmoniosos (análogo, complementar, monocromático). Copie e cole códigos HEX no seu CSS, HTML ou design.">
+    <meta name="keywords"
+        content="gerador de paleta de cores, combinação de cores, criar paleta rgb, códigos hex, nextools">
+    <meta name="author" content="NexTools">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gerador de Paleta de Cores — NexTools">
+    <meta property="og:description"
+        content="Crie paletas de cores harmoniosas. Copie e cole códigos HEX instantaneamente.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5750194644744805"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html#tools" class="nav-link">Ferramentas</a>
+                <a href="index.html#pricing" class="nav-link">Preços</a>
+                <a href="index.html#faq" class="nav-link">FAQ</a>
+                <a href="index.html#pricing" class="btn btn-primary btn-sm mobile-only">Upgrade Pro ✨</a>
+            </nav>
+            <div class="header-actions">
+                <a href="index.html#pricing" class="btn btn-primary btn-sm desktop-only">Upgrade Pro ✨</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="container breadcrumb" style="padding-top: 100px; padding-bottom: 20px;">
+        <a href="index.html" style="color: var(--accent-2); text-decoration: none;">← Voltar para Ferramentas</a>
+    </div>
+
+    <!-- ===== TOOL SECTION ===== -->
+    <section class="tools-section" id="tools" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Paleta de <span class="gradient-text">Cores</span></h1>
+            </div>
+
+            <div class="tool-panels">
+                <div class="tool-panel active" id="panel-palette">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Gerador de Combinações</h3>
+                            <p>Crie paletas de cores harmoniosas para seus projetos</p>
+                        </div>
+                        <div class="tool-card-body">
+                            <div class="palette-controls">
+                                <div class="input-group-small">
+                                    <label for="palette-mode">Modo de Combinação</label>
+                                    <select id="palette-mode" class="input">
+                                        <option value="random">Aleatório</option>
+                                        <option value="analogous">Análogo</option>
+                                        <option value="complementary">Complementar</option>
+                                        <option value="triadic">Triádico</option>
+                                        <option value="monochromatic">Monocromático</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" id="palette-generate">🎲 Gerar Paleta</button>
+                            </div>
+                            <div class="palette-display" id="palette-display">
+                                <!-- Colors will be generated here -->
+                            </div>
+                            <p class="palette-hint">Clique em uma cor para copiar o código HEX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AD BANNER MIDDLE ===== -->
+    <div class="ad-slot" id="ad-middle">
+        <div class="ad-placeholder">
+            <span>Anúncio — <a href="https://www.google.com/adsense" target="_blank">Google AdSense</a></span>
+        </div>
+    </div>
+
+    <!-- ===== CONTENT SECTION (SEO & AdSense) ===== -->
+    <section class="content-section">
+        <div class="container"
+            style="max-width: 800px; padding: 40px 0; color: var(--text-secondary); line-height: 1.6;">
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">Descubra Combinações de Cores Perfeitas</h2>
+            <p style="margin-bottom: 20px;">Não há nada mais frustrante do que ter uma ótima ideia para uma marca ou
+                site e perder dias debatendo quais tonalidades utilizar para colorir as partes essenciais visuais. Os
+                artistas frequentemente recorrem para o famoso sistema da Teoria das Cores. Foi pensando nisto que
+                programamos e desenvolvemos as funcionalidades matemáticas por detrás do nosso inovador gerador
+                gratuito.</p>
+
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">Entendendo os Modos de Paletas</h2>
+            <p style="margin-bottom: 20px;">Qual é a diferença entre uma paleta análoga para uma paleta monocromática?
+                Explicamos tudo abaixo para tornar seu processo de design excepcional e prático:</p>
+            <ul style="margin-left: 20px; margin-bottom: 20px;">
+                <li style="margin-bottom: 10px;"><strong>Análogo (Analogous):</strong> Utiliza cores diretamente
+                    adjacentes no disco de cores tradicional. Excelentes para causar a serenidade natural percebida na
+                    folhagem da mata com variantes tranquilas entre o verde e amarelo. Eles possuem alto contraste geral
+                    fraco mas se integram excepcionalmente como plano de fundo.</li>
+                <li style="margin-bottom: 10px;"><strong>Complementar (Complementary):</strong> Consiste na escolha de
+                    duas cores localizadas totalmente nos lados opostos na roda das cores. Eles atingem alto contraste,
+                    por exemplo roxo ao lado do amarelo, realçando elementos como botões ou chamadas para ação.</li>
+                <li style="margin-bottom: 10px;"><strong>Triádico (Triadic):</strong> Três cores separadas a distância
+                    igual umas das outras. As paletas costumam ter alta tensão vibrante em seus tons e são recomendadas
+                    de certa moda infantil e alegre para os designers que trabalham a temática cartoon.</li>
+                <li style="margin-bottom: 10px;"><strong>Monocromático (Monochromatic):</strong> Todas as tonalidades,
+                    luminosidades ou traços baseiam-se numa única matriz de tom (Hue) no núcleo HSL de mapeamento
+                    cromático. Proporciona imensa coerência temática da modernidade e clean design.</li>
+            </ul>
+
+            <h2 style="color: var(--accent-1); margin-bottom: 20px;">Obtenha facilmente os códigos para o seu código ou
+                projeto gráfico</h2>
+            <p style="margin-bottom: 20px;">O fluxo é rápido, criativo e viciante. Ao invés de usar ferramentas de
+                inspeção complexas, ao rolar os resultados das caixas geradas, as matrizes com suas sombras vão
+                apresentar em texto um código criptografado conhecido como HEX — amplamente utilizado entre web
+                designers ao lidar com a formatação CSS. Clicar nestas caixas enviará a referência completa
+                instantaneamente para sua folha de anotações principal (clipboard) sendo possível prosseguir em segundos
+                dentro do Illustrator, Figma ou Photoshop.</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+                <p class="footer-tagline">Ferramentas online rápidas e poderosas.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#tools">Ferramentas</a>
+                <a href="index.html#pricing">Preços</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="termos.html">Termos</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-message">Copiado!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

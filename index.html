@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexTools — Ferramentas Online Gratuitas e Premium</title>
+    <title>NexTools — Ferramentas Online Gratuitas</title>
     <meta name="description"
         content="Suite de ferramentas online gratuitas: Gerador de QR Code, Gerador de Senhas, Contador de Palavras, Paleta de Cores e Formatador JSON. Rápido, seguro e sem cadastro.">
     <meta name="keywords"
@@ -13,7 +13,7 @@
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="NexTools — Ferramentas Online Gratuitas e Premium">
+    <meta property="og:title" content="NexTools — Ferramentas Online Gratuitas">
     <meta property="og:description"
         content="5 ferramentas poderosas, gratuitas e sem cadastro. QR Code, Senhas, Contador, Paletas e JSON.">
     <meta property="og:type" content="website">
@@ -24,15 +24,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    <!-- QR Code Library -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5750194644744805"
         crossorigin="anonymous"></script>
+
+    <style>
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .portal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .portal-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .portal-title {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .portal-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,7 +85,7 @@
     <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="container header-inner">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <span class="logo-icon">⚡</span>
                 <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
             </a>
@@ -75,7 +120,7 @@
                 lugar, grátis.
             </p>
             <a href="#tools" class="btn btn-primary btn-lg">
-                Começar agora
+                Explorar Ferramentas
                 <span class="btn-arrow">→</span>
             </a>
         </div>
@@ -93,224 +138,61 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Nossas <span class="gradient-text">Ferramentas</span></h2>
-                <p class="section-subtitle">Selecione uma ferramenta abaixo para começar</p>
+                <p class="section-subtitle">Escolha uma solução especializada abaixo e facilite seu dia a dia.</p>
             </div>
 
-            <!-- Tool Navigation Tabs -->
-            <div class="tool-tabs">
-                <button class="tool-tab active" data-tool="qrcode">
-                    <span class="tool-tab-icon">📱</span>
-                    <span class="tool-tab-label">QR Code</span>
-                </button>
-                <button class="tool-tab" data-tool="password">
-                    <span class="tool-tab-icon">🔐</span>
-                    <span class="tool-tab-label">Senhas</span>
-                </button>
-                <button class="tool-tab" data-tool="wordcount">
-                    <span class="tool-tab-icon">📝</span>
-                    <span class="tool-tab-label">Contador</span>
-                </button>
-                <button class="tool-tab" data-tool="palette">
-                    <span class="tool-tab-icon">🎨</span>
-                    <span class="tool-tab-label">Paleta</span>
-                </button>
-                <button class="tool-tab" data-tool="json">
-                    <span class="tool-tab-icon">{ }</span>
-                    <span class="tool-tab-label">JSON</span>
-                </button>
+            <div class="portal-grid">
+                <a href="gerador-qrcode.html" class="portal-card">
+                    <span class="portal-icon">📱</span>
+                    <h3 class="portal-title">Gerador de QR Code</h3>
+                    <p class="portal-desc">Crie códigos QR instantaneamente a partir de links, textos e outros dados
+                        básicos.</p>
+                </a>
+
+                <a href="gerador-senhas.html" class="portal-card">
+                    <span class="portal-icon">🔐</span>
+                    <h3 class="portal-title">Gerador de Senhas</h3>
+                    <p class="portal-desc">Sinta-se mais seguro. Crie rapidamente senhas aleatórias praticamente
+                        indestrutíveis.</p>
+                </a>
+
+                <a href="contador-palavras.html" class="portal-card">
+                    <span class="portal-icon">📝</span>
+                    <h3 class="portal-title">Contador de Texto</h3>
+                    <p class="portal-desc">Inspecione frases, parágrafos, palavras e estime com precisão o tempo de
+                        leitura.</p>
+                </a>
+
+                <a href="paleta-cores.html" class="portal-card">
+                    <span class="portal-icon">🎨</span>
+                    <h3 class="portal-title">Paleta de Cores</h3>
+                    <p class="portal-desc">Explore maravilhosas combinações de cor para aplicar na sua marca ou layout
+                        web.</p>
+                </a>
+
+                <a href="formatador-json.html" class="portal-card">
+                    <span class="portal-icon">{ }</span>
+                    <h3 class="portal-title">Formatador JSON</h3>
+                    <p class="portal-desc">Faça o beautify de strings de dados complexas e valide payloads para sua API.
+                    </p>
+                </a>
             </div>
+        </div>
+    </section>
 
-            <!-- Tool Panels -->
-            <div class="tool-panels">
-
-                <!-- QR Code Generator -->
-                <div class="tool-panel active" id="panel-qrcode">
-                    <div class="tool-card">
-                        <div class="tool-card-header">
-                            <h3>Gerador de QR Code</h3>
-                            <p>Transforme qualquer texto ou URL em um QR Code pronto para download</p>
-                        </div>
-                        <div class="tool-card-body">
-                            <div class="tool-row">
-                                <div class="tool-input-group">
-                                    <label for="qr-input">Texto ou URL</label>
-                                    <input type="text" id="qr-input" class="input" placeholder="https://seusite.com" />
-                                    <div class="input-row">
-                                        <div class="input-group-small">
-                                            <label for="qr-size">Tamanho</label>
-                                            <select id="qr-size" class="input">
-                                                <option value="128">128px</option>
-                                                <option value="256" selected>256px</option>
-                                                <option value="512">512px</option>
-                                            </select>
-                                        </div>
-                                        <div class="input-group-small">
-                                            <label for="qr-color">Cor</label>
-                                            <input type="color" id="qr-color" class="input-color" value="#ffffff" />
-                                        </div>
-                                        <div class="input-group-small">
-                                            <label for="qr-bg">Fundo</label>
-                                            <input type="color" id="qr-bg" class="input-color" value="#0a0a1a" />
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" id="qr-generate">Gerar QR Code</button>
-                                </div>
-                                <div class="tool-output-group">
-                                    <div class="qr-preview" id="qr-preview">
-                                        <span class="preview-placeholder">Seu QR Code aparecerá aqui</span>
-                                    </div>
-                                    <button class="btn btn-secondary" id="qr-download" disabled>⬇ Download PNG</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Password Generator -->
-                <div class="tool-panel" id="panel-password">
-                    <div class="tool-card">
-                        <div class="tool-card-header">
-                            <h3>Gerador de Senhas Seguras</h3>
-                            <p>Crie senhas fortes e aleatórias para proteger suas contas</p>
-                        </div>
-                        <div class="tool-card-body">
-                            <div class="password-output-wrap">
-                                <input type="text" id="password-output" class="input password-display" readonly
-                                    value="Clique em gerar..." />
-                                <button class="btn-icon" id="password-copy" title="Copiar">📋</button>
-                            </div>
-                            <div class="password-strength" id="password-strength">
-                                <div class="strength-bar">
-                                    <div class="strength-fill" id="strength-fill"></div>
-                                </div>
-                                <span class="strength-label" id="strength-label">—</span>
-                            </div>
-                            <div class="password-options">
-                                <div class="option-row">
-                                    <label for="pw-length">Comprimento: <strong id="pw-length-val">16</strong></label>
-                                    <input type="range" id="pw-length" min="4" max="64" value="16"
-                                        class="range-input" />
-                                </div>
-                                <div class="checkbox-grid">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" id="pw-upper" checked /> Maiúsculas (A-Z)
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" id="pw-lower" checked /> Minúsculas (a-z)
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" id="pw-numbers" checked /> Números (0-9)
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" id="pw-symbols" checked /> Símbolos (!@#$)
-                                    </label>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" id="password-generate">🔄 Gerar Nova Senha</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Word Counter -->
-                <div class="tool-panel" id="panel-wordcount">
-                    <div class="tool-card">
-                        <div class="tool-card-header">
-                            <h3>Contador de Palavras e Caracteres</h3>
-                            <p>Analise seu texto com estatísticas detalhadas em tempo real</p>
-                        </div>
-                        <div class="tool-card-body">
-                            <textarea id="wc-input" class="input textarea" rows="8"
-                                placeholder="Cole ou digite seu texto aqui..."></textarea>
-                            <div class="stats-grid">
-                                <div class="stat-card">
-                                    <span class="stat-value" id="stat-words">0</span>
-                                    <span class="stat-label">Palavras</span>
-                                </div>
-                                <div class="stat-card">
-                                    <span class="stat-value" id="stat-chars">0</span>
-                                    <span class="stat-label">Caracteres</span>
-                                </div>
-                                <div class="stat-card">
-                                    <span class="stat-value" id="stat-chars-no-space">0</span>
-                                    <span class="stat-label">Sem espaços</span>
-                                </div>
-                                <div class="stat-card">
-                                    <span class="stat-value" id="stat-sentences">0</span>
-                                    <span class="stat-label">Frases</span>
-                                </div>
-                                <div class="stat-card">
-                                    <span class="stat-value" id="stat-paragraphs">0</span>
-                                    <span class="stat-label">Parágrafos</span>
-                                </div>
-                                <div class="stat-card">
-                                    <span class="stat-value" id="stat-reading">0s</span>
-                                    <span class="stat-label">Tempo leitura</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Color Palette -->
-                <div class="tool-panel" id="panel-palette">
-                    <div class="tool-card">
-                        <div class="tool-card-header">
-                            <h3>Gerador de Paleta de Cores</h3>
-                            <p>Crie paletas de cores harmoniosas para seus projetos</p>
-                        </div>
-                        <div class="tool-card-body">
-                            <div class="palette-controls">
-                                <div class="input-group-small">
-                                    <label for="palette-mode">Modo</label>
-                                    <select id="palette-mode" class="input">
-                                        <option value="random">Aleatório</option>
-                                        <option value="analogous">Análogo</option>
-                                        <option value="complementary">Complementar</option>
-                                        <option value="triadic">Triádico</option>
-                                        <option value="monochromatic">Monocromático</option>
-                                    </select>
-                                </div>
-                                <button class="btn btn-primary" id="palette-generate">🎲 Gerar Paleta</button>
-                            </div>
-                            <div class="palette-display" id="palette-display">
-                                <!-- Colors will be generated here -->
-                            </div>
-                            <p class="palette-hint">Clique em uma cor para copiar o código HEX</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- JSON Formatter -->
-                <div class="tool-panel" id="panel-json">
-                    <div class="tool-card">
-                        <div class="tool-card-header">
-                            <h3>Formatador e Validador JSON</h3>
-                            <p>Formate, valide e minifique seus dados JSON instantaneamente</p>
-                        </div>
-                        <div class="tool-card-body">
-                            <div class="json-layout">
-                                <div class="json-col">
-                                    <label>Entrada</label>
-                                    <textarea id="json-input" class="input textarea code-textarea" rows="12"
-                                        placeholder='{"nome": "NexTools", "versao": 1}'></textarea>
-                                </div>
-                                <div class="json-col">
-                                    <label>Saída</label>
-                                    <pre id="json-output"
-                                        class="json-output-pre"><code>A saída formatada aparecerá aqui...</code></pre>
-                                </div>
-                            </div>
-                            <div class="json-status" id="json-status"></div>
-                            <div class="json-actions">
-                                <button class="btn btn-primary" id="json-format">Formatar</button>
-                                <button class="btn btn-secondary" id="json-minify">Minificar</button>
-                                <button class="btn btn-secondary" id="json-validate">Validar</button>
-                                <button class="btn btn-secondary" id="json-copy">📋 Copiar Saída</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- ===== CONTENT SECTION (SEO & AdSense) ===== -->
+    <section class="content-section"
+        style="padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px;">
+        <div class="container" style="max-width: 800px; color: var(--text-secondary); line-height: 1.6;">
+            <h2 style="color: var(--text-primary); margin-bottom: 20px; font-size: 1.8rem;">O que é a NexTools?</h2>
+            <p style="margin-bottom: 20px;">
+                A NexTools é a sua central de produtividade online para tarefas diárias essenciais. Desenvolvida para
+                ser ágil, minimalista e direta ao ponto. Nós reunimos as cinco utilidades mais vitais para
+                desenvolvedores, escritores, designers e empreendedores num portal onde nenhuma das execuções necessita
+                que você preencha fichas cansativas ou acesse conta. Queremos viabilizar acesso democrático sem custos
+                para você focar apenas em construir as suas ideias, preservando 100% da segurança computacional operando
+                sob o escopo e autorização do seu navegador residente.
+            </p>
         </div>
     </section>
 
@@ -408,16 +290,11 @@
                 <a href="#pricing">Preços</a>
                 <a href="#faq">FAQ</a>
                 <a href="privacidade.html">Privacidade</a>
-                <a href="#">Termos</a>
+                <a href="termos.html">Termos</a>
             </div>
             <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
         </div>
     </footer>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <span id="toast-message">Copiado!</span>
-    </div>
 
     <script src="app.js"></script>
 </body>

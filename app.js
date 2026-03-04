@@ -40,6 +40,7 @@ function initMobileMenu() {
 /* ===== TOOL TABS ===== */
 function initToolTabs() {
     const tabs = document.querySelectorAll('.tool-tab');
+    if (!tabs || tabs.length === 0) return;
     const panels = document.querySelectorAll('.tool-panel');
 
     tabs.forEach(tab => {
@@ -83,6 +84,7 @@ async function copyToClipboard(text) {
 /* ===== 1. QR CODE GENERATOR ===== */
 function initQRCode() {
     const input = document.getElementById('qr-input');
+    if (!input) return;
     const preview = document.getElementById('qr-preview');
     const generateBtn = document.getElementById('qr-generate');
     const downloadBtn = document.getElementById('qr-download');
@@ -144,6 +146,7 @@ function initQRCode() {
 /* ===== 2. PASSWORD GENERATOR ===== */
 function initPasswordGenerator() {
     const output = document.getElementById('password-output');
+    if (!output) return;
     const generateBtn = document.getElementById('password-generate');
     const copyBtn = document.getElementById('password-copy');
     const lengthSlider = document.getElementById('pw-length');
@@ -235,6 +238,7 @@ function initPasswordGenerator() {
 /* ===== 3. WORD COUNTER ===== */
 function initWordCounter() {
     const input = document.getElementById('wc-input');
+    if (!input) return;
 
     function updateStats() {
         const text = input.value;
@@ -275,6 +279,7 @@ function initWordCounter() {
 /* ===== 4. COLOR PALETTE ===== */
 function initColorPalette() {
     const display = document.getElementById('palette-display');
+    if (!display) return;
     const generateBtn = document.getElementById('palette-generate');
     const modeSelect = document.getElementById('palette-mode');
 
@@ -391,6 +396,7 @@ function initColorPalette() {
 /* ===== 5. JSON FORMATTER ===== */
 function initJSONFormatter() {
     const input = document.getElementById('json-input');
+    if (!input) return;
     const output = document.getElementById('json-output');
     const status = document.getElementById('json-status');
     const formatBtn = document.getElementById('json-format');
