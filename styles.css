@@ -1222,10 +1222,6 @@ select.input {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .nav {
-        display: none;
-    }
-
     .hero {
         padding: 120px 0 60px;
     }
