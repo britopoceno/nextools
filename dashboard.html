@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel — NexTools Pro</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .dashboard-page {
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .user-greeting {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+        }
+
+        .plan-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .plan-free {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+
+        .plan-pro {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            color: white;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        .panel-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .panel-card h3 {
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+
+        .panel-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .api-key-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px dashed var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: var(--accent-2);
+            word-break: break-all;
+            margin-bottom: 15px;
+        }
+
+        /* Loading Overlay */
+        #auth-loading {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--text-primary);
+        }
+
+        .loader {
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--accent-1);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Shield -->
+    <div id="auth-loading">
+        <div class="loader"></div>
+        <p>Verificando sessão...</p>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html#tools" class="nav-link">Ferramentas</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-secondary btn-sm" id="btn-logout">Sair da conta</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container dashboard-page" style="display: none;" id="dashboard-content">
+
+        <div class="dashboard-header">
+            <div>
+                <h1 class="user-greeting">Olá, <span id="user-name">Usuário</span></h1>
+                <p style="color: var(--text-secondary); margin-top: 5px;">
+                    Plano atual: <span id="user-plan-badge" class="plan-badge plan-free">Grátis</span>
+                </p>
+            </div>
+            <div id="upgrade-cta">
+                <!-- Will be hidden if user is PRO -->
+                <button class="btn btn-primary" id="btn-upgrade">✨ Fazer Upgrade para Pro (R$19/mês)</button>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Left Column -->
+            <div style="display: flex; flex-direction: column; gap: 30px;">
+                <div class="panel-card">
+                    <h3>Suas Vantagens</h3>
+                    <div id="benefits-free">
+                        <p>Você está no plano Grátis. Você possui acesso ilimitado a todas as ferramentas básicas, porém
+                            com exibição de anúncios locais e sem recursos de operações Lote (Batch).</p>
+                        <ul style="color: var(--text-secondary); margin-left: 20px; line-height: 1.8;">
+                            <li>Acesso básico ao portal</li>
+                            <li>Geração unitária de QR Codes</li>
+                            <li>Geração unitária de Senhas</li>
+                        </ul>
+                    </div>
+                    <div id="benefits-pro" style="display: none;">
+                        <p>Bem-vindo ao <strong>NexTools Pro</strong>! Sua conta está ativada e você possui acesso total
+                            à nossa infraestrutura premium.</p>
+                        <ul style="color: var(--accent-1); margin-left: 20px; line-height: 1.8;">
+                            <li>✅ Zero anúncios em toda a plataforma</li>
+                            <li>✅ Acesso desbloqueado a Operações em Lote</li>
+                            <li>✅ Chave de acesso liberada para a nossa API Rest</li>
+                            <li>✅ Suporte Prioritário por email</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel-card" id="api-card" style="opacity: 0.5; pointer-events: none;">
+                    <h3>Sua Chave de API</h3>
+                    <p>Utilize esta chave JWT para fazer requisições diretas aos nossos servidores sem precisar acessar
+                        o frontend.</p>
+                    <h2 class="auth-title" style="text-align: left; margin-bottom: 5px;">Acesso Básico</h2>
+                    <p class="auth-subtitle" style="text-align: left; margin-bottom: 20px;">Faça o upgrade para remover
+                        anúncios e liberar recursos em lote.</p>
+                    <a href="index.html#pricing" id="dashboard-upgrade-btn" class="btn btn-primary"
+                        style="width: auto; display: inline-block;">Fazer Upgrade para Pro</a>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                <div class="panel-card">
+                    <h3>Dados da Conta</h3>
+                    <p><strong>Nome:</strong> <span id="profile-name">...</span></p>
+                    <p><strong>E-mail:</strong> <span id="profile-email">...</span></p>
+                    <p><strong>Membro desde:</strong> <span id="profile-date">...</span></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Firebase SDK Scripts -->
+    <script type="module">
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        // Auth initialization happens globally via module imports. 
+        // Notice we are relying on auth.js being loaded (or standard initialization)
+        import { auth, db } from './auth-init.js'; // We will create this helper next.
+
+        const loading = document.getElementById('auth-loading');
+        const content = document.getElementById('dashboard-content');
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in.
+                document.getElementById('user-name').textContent = user.displayName || 'Usuário';
+                document.getElementById('profile-name').textContent = user.displayName || 'Não informado';
+                document.getElementById('profile-email').textContent = user.email;
+                document.getElementById('profile-date').textContent = new Date(user.metadata.creationTime).toLocaleDateString('pt-BR');
+
+                // Check Pro Status
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    if (data.isPro) {
+                        // Apply PRO visual changes
+                        const badge = document.getElementById('user-plan-badge');
+                        badge.textContent = "PRO";
+                        badge.className = "plan-badge plan-pro";
+
+                        document.getElementById('upgrade-cta').style.display = 'none';
+                        document.getElementById('benefits-free').style.display = 'none';
+                        document.getElementById('benefits-pro').style.display = 'block';
+
+                        // Unlock API Card
+                        const apiCard = document.getElementById('api-card');
+                        apiCard.style.opacity = '1';
+                        apiCard.style.pointerEvents = 'auto';
+
+                        // Mock an API key for demo purposes based on UID
+                        const fakeKey = "nxt_live_" + btoa(user.uid).replace(/=/g, '');
+                        document.getElementById('api-key-display').textContent = fakeKey;
+
+                        const copyBtn = document.getElementById('btn-copy-api');
+                        copyBtn.disabled = false;
+                        copyBtn.addEventListener('click', () => {
+                            navigator.clipboard.writeText(fakeKey);
+                            copyBtn.textContent = "Copiado!";
+                            setTimeout(() => copyBtn.textContent = "Copiar Chave", 2000);
+                        });
+                    }
+                }
+
+                // Show Dashboard
+                loading.style.display = 'none';
+                content.style.display = 'block';
+            } else {
+                // No user is signed in, redirect to login
+                window.location.href = "login.html";
+            }
+        });
+
+        // Logout
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.href = "index.html";
+            });
+        });
+
+        // Upgrade Button (Stripe Integration Prep)
+        document.getElementById('btn-upgrade').addEventListener('click', () => {
+            alert('Aguardando Link de Pagamento do Stripe!');
+            // Here we will redirect to the Stripe Checkout Session URL later
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro — NexTools Pro</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .auth-logo {
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .auth-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .auth-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .auth-form label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .auth-footer {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .auth-footer a {
+            color: var(--accent-1);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        #auth-error {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="auth-page">
+    <div class="auth-container">
+        <a href="index.html" class="logo auth-logo">
+            <span class="logo-icon">⚡</span>
+            <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+        </a>
+        <h1 class="auth-title">Crie sua conta</h1>
+        <p class="auth-subtitle">Junte-se ao NexTools Pro</p>
+
+        <form class="auth-form" id="signup-form">
+            <div>
+                <label for="name">Nome completo</label>
+                <input type="text" id="name" class="input" placeholder="João Silva" required>
+            </div>
+            <div>
+                <label for="email">E-mail</label>
+                <input type="email" id="email" class="input" placeholder="seu@email.com" required>
+            </div>
+            <div>
+                <label for="password">Senha (mín. 6 caracteres)</label>
+                <input type="password" id="password" class="input" placeholder="••••••••" required minlength="6">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="btn-signup">Cadastrar</button>
+            <div id="auth-error">Ocorreu um erro ao criar conta.</div>
+        </form>
+
+        <div class="auth-footer">
+            Já possui uma conta? <a href="login.html">Fazer login</a>
+        </div>
+    </div>
+
+    <!-- Firebase SDK Scripts (Will be populated later) -->
+    <script type="module" src="auth.js"></script>
+</body>
+
+</html>

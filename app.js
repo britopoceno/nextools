@@ -11,7 +11,35 @@ document.addEventListener('DOMContentLoaded', () => {
     initColorPalette();
     initJSONFormatter();
     initMobileMenu();
+
+    // Pro User - Ad Removal Check (Runs after auth.js might have set the class)
+    setTimeout(applyProFeatures, 500);
 });
+
+function applyProFeatures() {
+    if (document.body.classList.contains('pro-user')) {
+        // Hide Ads
+        document.querySelectorAll('.ad-slot').forEach(el => el.style.display = 'none');
+
+        // Unlock Pro Features (Batch Operations)
+        const batchLocks = document.querySelectorAll('.pro-feature-lock');
+        batchLocks.forEach(lock => {
+            lock.style.background = 'transparent';
+            lock.style.border = 'none';
+            lock.style.padding = '0';
+
+            // Remove the "PRO" badge and lock text
+            const badge = lock.querySelector('.plan-badge');
+            if (badge) badge.style.display = 'none';
+            const extraText = lock.querySelector('p');
+            if (extraText) extraText.style.display = 'none';
+
+            // Enable inputs inside
+            const inputs = lock.querySelectorAll('input');
+            inputs.forEach(input => input.disabled = false);
+        });
+    }
+}
 
 /* ===== MOBILE MENU ===== */
 function initMobileMenu() {
@@ -190,49 +218,19 @@ function initPasswordGenerator() {
         for (let i = 0; i < length; i++) {
             password += chars[array[i] % chars.length];
         }
-
         output.value = password;
         updateStrength(password);
+        return password;
     }
 
+    // Function to calculate strength
     function updateStrength(password) {
-        let score = 0;
-        if (password.length >= 8) score++;
-        if (password.length >= 12) score++;
-        if (password.length >= 20) score++;
-        if (/[A-Z]/.test(password)) score++;
-        if (/[a-z]/.test(password)) score++;
-        if (/[0-9]/.test(password)) score++;
-        if (/[^A-Za-z0-9]/.test(password)) score++;
-
-        const levels = [
-            { min: 0, label: 'Muito Fraca', color: '#ef4444', width: 15 },
-            { min: 2, label: 'Fraca', color: '#f97316', width: 30 },
-            { min: 3, label: 'Razoável', color: '#eab308', width: 50 },
-            { min: 5, label: 'Forte', color: '#22c55e', width: 75 },
-            { min: 6, label: 'Muito Forte', color: '#06b6d4', width: 100 }
-        ];
-
-        let level = levels[0];
-        for (const l of levels) {
-            if (score >= l.min) level = l;
-        }
-
-        strengthFill.style.width = level.width + '%';
-        strengthFill.style.background = level.color;
-        strengthLabel.textContent = level.label;
-        strengthLabel.style.color = level.color;
+        copyToClipboard(output.value);
     }
+});
 
-    generateBtn.addEventListener('click', generatePassword);
-    copyBtn.addEventListener('click', () => {
-        if (output.value && output.value !== 'Clique em gerar...') {
-            copyToClipboard(output.value);
-        }
-    });
-
-    // Generate initial password
-    generatePassword();
+// Generate initial password
+generatePassword();
 }
 
 /* ===== 3. WORD COUNTER ===== */

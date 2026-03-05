@@ -110,7 +110,32 @@
                                     </label>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" id="password-generate">🔄 Gerar Nova Senha</button>
+
+                            <!-- Batch Operation (PRO) -->
+                            <div class="pro-feature-lock" id="batch-password-lock"
+                                style="margin-top: 15px; padding: 15px; background: rgba(139, 92, 246, 0.1); border: 1px dashed var(--accent-1); border-radius: 8px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <label for="pw-batch-count"
+                                        style="font-weight: 500; font-size: 0.9rem; color: var(--text-primary);">Quantidade
+                                        (Lote)</label>
+                                    <span class="plan-badge plan-pro"
+                                        style="font-size: 0.7rem; padding: 2px 8px;">PRO</span>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="number" id="pw-batch-count" class="input" min="1" max="50" value="1"
+                                        disabled style="width: 80px;" />
+                                    <p
+                                        style="font-size: 0.8rem; color: var(--text-secondary); flex: 1; margin: 0; align-self: center;">
+                                        Gere até 50 senhas de uma vez exportadas em arquivo TXT. <a
+                                            href="index.html#pricing" style="color: var(--accent-1);">Faça upgrade</a>
+                                        para liberar.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary" id="password-generate" style="margin-top: 20px;">🔄 Gerar
+                                Nova(s) Senha(s)</button>
                         </div>
                     </div>
                 </div>

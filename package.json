@@ -1,0 +1,25 @@
+{
+  "name": "nextools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/britopoceno/nextools.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/britopoceno/nextools/issues"
+  },
+  "homepage": "https://github.com/britopoceno/nextools#readme",
+  "dependencies": {
+    "firebase-admin": "^13.7.0",
+    "stripe": "^20.4.0"
+  }
+}
