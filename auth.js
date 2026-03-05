@@ -28,20 +28,32 @@ onAuthStateChanged(auth, async (user) => {
             console.error("Error fetching user role:", error);
         }
 
-        // Update UI headers if element exists
-        const loginBtn = document.querySelector('a[href="#pricing"].btn-primary.desktop-only');
-        if (loginBtn) {
-            loginBtn.textContent = "Dashboard";
-            loginBtn.href = "dashboard.html";
-            loginBtn.classList.remove('btn-primary');
-            loginBtn.classList.add('btn-secondary');
-            // Update Dashboard Upgrade Link (if on dashboard.html)
-            const dashboardUpgradeBtn = document.getElementById('dashboard-upgrade-btn');
-            if (dashboardUpgradeBtn) {
-                // Replace with the actual Stripe Payment Link later
-                const baseStripeLink = "https://buy.stripe.com/test_fZucN70PRffE5vOfwX1ck00";
-                dashboardUpgradeBtn.href = `${baseStripeLink}?client_reference_id=${user.uid}`;
-            }
+        // Update Header Actions
+        const authBtn = document.getElementById('header-auth-btn');
+        const loginLink = document.querySelector('.header-actions .nav-link.desktop-only');
+
+        if (authBtn) {
+            authBtn.textContent = "Dashboard";
+            authBtn.href = "dashboard.html";
+            authBtn.classList.remove('btn-primary');
+            authBtn.classList.add('btn-secondary');
+        }
+        if (loginLink) {
+            loginLink.style.display = 'none';
+        }
+
+        // Update Hero Button
+        const heroSignupBtn = document.getElementById('hero-signup-btn');
+        if (heroSignupBtn) {
+            heroSignupBtn.textContent = "Meu Painel";
+            heroSignupBtn.href = "dashboard.html";
+        }
+
+        // Update Dashboard Specifics
+        const dashboardUpgradeBtn = document.getElementById('dashboard-upgrade-btn');
+        if (dashboardUpgradeBtn) {
+            const baseStripeLink = "https://buy.stripe.com/test_fZucN70PRffE5vOfwX1ck00";
+            dashboardUpgradeBtn.href = `${baseStripeLink}?client_reference_id=${user.uid}`;
         }
     }
 });
