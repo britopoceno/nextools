@@ -4,24 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexTools — Ferramentas Online Gratuitas</title>
+    <title>NexTools — 5 Ferramentas Online Gratuitas | QR Code, Senhas, JSON e mais</title>
     <meta name="description"
-        content="Suite de ferramentas online gratuitas: Gerador de QR Code, Gerador de Senhas, Contador de Palavras, Paleta de Cores e Formatador JSON. Rápido, seguro e sem cadastro.">
+        content="5 ferramentas online gratuitas para desenvolvedores, designers e criadores: QR Code, Gerador de Senhas Fortes, Contador de Palavras, Paleta de Cores e Formatador JSON. Sem cadastro, funciona no navegador.">
     <meta name="keywords"
-        content="ferramentas online, gerador qr code, gerador senha, contador palavras, paleta cores, formatador json, tools online">
+        content="ferramentas online grátis, gerador qr code, gerador de senhas fortes, contador de palavras, paleta de cores, formatador json, ferramentas para desenvolvedores">
     <meta name="author" content="NexTools">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://nextools.com.br/">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="NexTools — Ferramentas Online Gratuitas">
+    <meta property="og:title" content="NexTools — 5 Ferramentas Online Gratuitas">
     <meta property="og:description"
-        content="5 ferramentas poderosas, gratuitas e sem cadastro. QR Code, Senhas, Contador, Paletas e JSON.">
+        content="QR Code, senhas fortes, contador de palavras, paleta de cores e formatador JSON — grátis, sem cadastro e funcionando direto no navegador.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nextools.com.br/">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "NexTools",
+        "url": "https://nextools.com.br",
+        "description": "5 ferramentas online gratuitas para desenvolvedores, designers e criadores."
+    }
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap"
         rel="stylesheet">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -40,41 +53,82 @@
         }
 
         .portal-card {
-            background: var(--card-bg);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 40px 20px;
+            border-radius: 16px;
+            padding: 36px 24px;
             text-align: center;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .portal-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        /* Colored top accent bar per card */
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            border-radius: 16px 16px 0 0;
         }
+
+        .portal-card:hover::before { opacity: 1; }
+
+        .portal-card:nth-child(1)::before { background: #14b8a6; }
+        .portal-card:nth-child(2)::before { background: #f59e0b; }
+        .portal-card:nth-child(3)::before { background: #10b981; }
+        .portal-card:nth-child(4)::before { background: #ec4899; }
+        .portal-card:nth-child(5)::before { background: #818cf8; }
+
+        .portal-card:hover { transform: translateY(-6px); }
+
+        .portal-card:nth-child(1):hover { border-color: rgba(20,184,166,0.35); box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(20,184,166,0.07); }
+        .portal-card:nth-child(2):hover { border-color: rgba(245,158,11,0.35); box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(245,158,11,0.07); }
+        .portal-card:nth-child(3):hover { border-color: rgba(16,185,129,0.35); box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(16,185,129,0.07); }
+        .portal-card:nth-child(4):hover { border-color: rgba(236,72,153,0.35); box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(236,72,153,0.07); }
+        .portal-card:nth-child(5):hover { border-color: rgba(129,140,248,0.35); box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(129,140,248,0.07); }
 
         .portal-icon {
-            font-size: 3rem;
+            font-size: 1.8rem;
             margin-bottom: 20px;
-            display: inline-block;
+            width: 68px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: transform 0.25s ease;
         }
+
+        .portal-card:hover .portal-icon { transform: scale(1.1) rotate(-3deg); }
+
+        .portal-card:nth-child(1) .portal-icon { background: rgba(20,184,166,0.12); }
+        .portal-card:nth-child(2) .portal-icon { background: rgba(245,158,11,0.12); }
+        .portal-card:nth-child(3) .portal-icon { background: rgba(16,185,129,0.12); }
+        .portal-card:nth-child(4) .portal-icon { background: rgba(236,72,153,0.12); }
+        .portal-card:nth-child(5) .portal-icon { background: rgba(129,140,248,0.12); }
 
         .portal-title {
             color: var(--text-primary);
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             margin-bottom: 10px;
-            font-weight: 600;
+            font-weight: 700;
+            font-family: var(--font-display);
         }
 
         .portal-desc {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            line-height: 1.6;
             margin: 0;
         }
     </style>
@@ -114,16 +168,16 @@
     <section class="hero">
         <div class="hero-glow"></div>
         <div class="container hero-inner">
-            <div class="hero-badge">🚀 5 ferramentas gratuitas — sem cadastro</div>
+            <div class="hero-badge">✦ Grátis · Sem cadastro · Funciona no navegador</div>
             <h1 class="hero-title">
-                Ferramentas online<br>
-                <span class="gradient-text">rápidas e poderosas</span>
+                Chega de abrir<br>
+                <span class="gradient-text">dez abas diferentes</span>
             </h1>
             <p class="hero-subtitle">
-                QR Codes, senhas seguras, contagem de palavras, paletas de cores e formatação JSON — tudo em um só
-                lugar, grátis.
+                QR Code, senhas fortes, análise de texto, paletas de cores e formatação JSON —
+                cinco ferramentas essenciais, todas em um só lugar.
             </p>
-            <div class="hero-actions" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <div class="hero-actions">
                 <a href="#tools" class="btn btn-primary btn-lg">
                     Explorar Ferramentas
                     <span class="btn-arrow">→</span>
@@ -147,7 +201,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Nossas <span class="gradient-text">Ferramentas</span></h2>
-                <p class="section-subtitle">Escolha uma solução especializada abaixo e facilite seu dia a dia.</p>
+                <p class="section-subtitle">Escolha a ferramenta que precisa agora — sem instalação, sem cadastro.</p>
             </div>
 
             <div class="portal-grid">
@@ -189,19 +243,12 @@
         </div>
     </section>
 
-    <!-- ===== CONTENT SECTION (SEO & AdSense) ===== -->
-    <section class="content-section"
-        style="padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px;">
-        <div class="container" style="max-width: 800px; color: var(--text-secondary); line-height: 1.6;">
-            <h2 style="color: var(--text-primary); margin-bottom: 20px; font-size: 1.8rem;">O que é a NexTools?</h2>
-            <p style="margin-bottom: 20px;">
-                A NexTools é a sua central de produtividade online para tarefas diárias essenciais. Desenvolvida para
-                ser ágil, minimalista e direta ao ponto. Nós reunimos as cinco utilidades mais vitais para
-                desenvolvedores, escritores, designers e empreendedores num portal onde nenhuma das execuções necessita
-                que você preencha fichas cansativas ou acesse conta. Queremos viabilizar acesso democrático sem custos
-                para você focar apenas em construir as suas ideias, preservando 100% da segurança computacional operando
-                sob o escopo e autorização do seu navegador residente.
-            </p>
+    <!-- ===== CONTENT SECTION (SEO) ===== -->
+    <section class="content-section">
+        <div class="container">
+            <h2 style="color: var(--text-primary); font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 16px;">O que é a NexTools?</h2>
+            <p>A NexTools reúne as ferramentas online mais usadas por desenvolvedores, designers, redatores e criadores de conteúdo em um único lugar. Sem anúncios invasivos, sem cadastro obrigatório, sem instalação. Tudo funciona diretamente no seu navegador — seus dados nunca saem do seu computador.</p>
+            <p>De <a href="gerador-qrcode.html" style="color: var(--accent-3); text-decoration: none;">QR Codes</a> a <a href="gerador-senhas.html" style="color: var(--accent-3); text-decoration: none;">senhas seguras</a>, de <a href="contador-palavras.html" style="color: var(--accent-3); text-decoration: none;">análise de textos</a> a <a href="paleta-cores.html" style="color: var(--accent-3); text-decoration: none;">paletas de cores</a> e <a href="formatador-json.html" style="color: var(--accent-3); text-decoration: none;">formatação JSON</a>: cinco utilitários essenciais, sempre disponíveis e sempre gratuitos.</p>
         </div>
     </section>
 
@@ -217,7 +264,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Planos <span class="gradient-text">Simples</span></h2>
-                <p class="section-subtitle">Comece grátis, faça upgrade quando precisar</p>
+                <p class="section-subtitle">Sem compromisso. Cancele quando quiser.</p>
             </div>
             <div class="pricing-grid">
                 <div class="pricing-card">

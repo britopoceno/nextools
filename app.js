@@ -223,14 +223,42 @@ function initPasswordGenerator() {
         return password;
     }
 
-    // Function to calculate strength
     function updateStrength(password) {
-        copyToClipboard(output.value);
-    }
-});
+        const len = password.length;
+        let score = 0;
+        if (len >= 8) score++;
+        if (len >= 12) score++;
+        if (len >= 16) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/[a-z]/.test(password)) score++;
+        if (/[0-9]/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
 
-// Generate initial password
-generatePassword();
+        const levels = [
+            { pct: '15%',  color: '#ef4444', label: 'Muito fraca' },
+            { pct: '30%',  color: '#f97316', label: 'Fraca' },
+            { pct: '55%',  color: '#eab308', label: 'Razoável' },
+            { pct: '80%',  color: '#22c55e', label: 'Forte' },
+            { pct: '100%', color: '#14b8a6', label: 'Muito forte' },
+        ];
+
+        const idx = Math.min(Math.floor(score / 1.5), 4);
+        strengthFill.style.width  = levels[idx].pct;
+        strengthFill.style.background = levels[idx].color;
+        strengthLabel.textContent = levels[idx].label;
+        strengthLabel.style.color = levels[idx].color;
+    }
+
+    generateBtn.addEventListener('click', generatePassword);
+
+    copyBtn.addEventListener('click', () => {
+        if (output.value && output.value !== 'Clique em gerar...') {
+            copyToClipboard(output.value);
+        }
+    });
+
+    // Generate initial password on load
+    generatePassword();
 }
 
 /* ===== 3. WORD COUNTER ===== */
