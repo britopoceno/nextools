@@ -836,6 +836,13 @@ select.input {
     color: var(--text-muted);
 }
 
+/* ===== JSON SYNTAX HIGHLIGHTING ===== */
+.json-key     { color: #818cf8; }
+.json-string  { color: #34d399; }
+.json-number  { color: #fb923c; }
+.json-boolean { color: #f472b6; }
+.json-null    { color: #94a3b8; }
+
 /* ===== JSON FORMATTER ===== */
 .json-layout {
     display: grid;
@@ -1137,6 +1144,7 @@ select.input {
 
 .footer-brand {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 8px;
@@ -1144,6 +1152,8 @@ select.input {
 }
 
 .footer-tagline {
+    width: 100%;
+    text-align: center;
     color: var(--text-muted);
     font-size: 0.85rem;
     margin-bottom: 20px;

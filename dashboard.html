@@ -208,11 +208,19 @@
                     <h3>Sua Chave de API</h3>
                     <p>Utilize esta chave JWT para fazer requisições diretas aos nossos servidores sem precisar acessar
                         o frontend.</p>
-                    <h2 class="auth-title" style="text-align: left; margin-bottom: 5px;">Acesso Básico</h2>
-                    <p class="auth-subtitle" style="text-align: left; margin-bottom: 20px;">Faça o upgrade para remover
-                        anúncios e liberar recursos em lote.</p>
-                    <a href="index.html#pricing" id="dashboard-upgrade-btn" class="btn btn-primary"
-                        style="width: auto; display: inline-block;">Fazer Upgrade para Pro</a>
+                    <!-- Shown for free users -->
+                    <div id="api-free-notice">
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px;">Disponível
+                            apenas no plano Pro.</p>
+                        <a href="index.html#pricing" id="dashboard-upgrade-btn" class="btn btn-primary"
+                            style="width: auto; display: inline-block;">Fazer Upgrade para Pro</a>
+                    </div>
+                    <!-- Shown for Pro users -->
+                    <div id="api-pro-section" style="display: none;">
+                        <div class="api-key-box" id="api-key-display"></div>
+                        <button id="btn-copy-api" class="btn btn-secondary" disabled
+                            style="margin-top: 10px;">Copiar Chave</button>
+                    </div>
                 </div>
             </div>
 
@@ -266,6 +274,10 @@
                         const apiCard = document.getElementById('api-card');
                         apiCard.style.opacity = '1';
                         apiCard.style.pointerEvents = 'auto';
+
+                        // Show Pro section, hide free notice
+                        document.getElementById('api-free-notice').style.display = 'none';
+                        document.getElementById('api-pro-section').style.display = 'block';
 
                         // Mock an API key for demo purposes based on UID
                         const fakeKey = "nxt_live_" + btoa(user.uid).replace(/=/g, '');
