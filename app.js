@@ -516,23 +516,29 @@ function initTokenCounter() {
 
     const MODELS = {
         // Anthropic
-        'claude-37-sonnet': { name: 'Claude 3.7 Sonnet', inputPer1M: 3.00,  outputPer1M: 15.00, contextK: 200  },
-        'claude-sonnet':    { name: 'Claude 3.5 Sonnet', inputPer1M: 3.00,  outputPer1M: 15.00, contextK: 200  },
-        'claude-haiku':     { name: 'Claude 3.5 Haiku',  inputPer1M: 0.80,  outputPer1M: 4.00,  contextK: 200  },
+        'claude-opus-46':   { name: 'Claude Opus 4.6',   inputPer1M: 5.00,  outputPer1M: 25.00, contextK: 200   },
+        'claude-sonnet-46': { name: 'Claude Sonnet 4.6', inputPer1M: 3.00,  outputPer1M: 15.00, contextK: 200   },
+        'claude-haiku-45':  { name: 'Claude Haiku 4.5',  inputPer1M: 1.00,  outputPer1M: 5.00,  contextK: 200   },
         // OpenAI
-        'o1':               { name: 'o1',                inputPer1M: 15.00, outputPer1M: 60.00, contextK: 200  },
-        'o3-mini':          { name: 'o3-mini',           inputPer1M: 1.10,  outputPer1M: 4.40,  contextK: 200  },
-        'gpt41':            { name: 'GPT-4.1',           inputPer1M: 2.00,  outputPer1M: 8.00,  contextK: 1000 },
-        'gpt4o':            { name: 'GPT-4o',            inputPer1M: 2.50,  outputPer1M: 10.00, contextK: 128  },
-        'gpt41-mini':       { name: 'GPT-4.1 mini',      inputPer1M: 0.40,  outputPer1M: 1.60,  contextK: 1000 },
-        'gpt4o-mini':       { name: 'GPT-4o mini',       inputPer1M: 0.15,  outputPer1M: 0.60,  contextK: 128  },
+        'o3':               { name: 'o3',                inputPer1M: 2.00,  outputPer1M: 8.00,  contextK: 200   },
+        'o4-mini':          { name: 'o4-mini',           inputPer1M: 1.10,  outputPer1M: 4.40,  contextK: 200   },
+        'gpt41':            { name: 'GPT-4.1',           inputPer1M: 2.00,  outputPer1M: 8.00,  contextK: 1000  },
+        'gpt41-mini':       { name: 'GPT-4.1 mini',      inputPer1M: 0.40,  outputPer1M: 1.60,  contextK: 1000  },
+        'gpt4o':            { name: 'GPT-4o',            inputPer1M: 2.50,  outputPer1M: 10.00, contextK: 128   },
+        'gpt4o-mini':       { name: 'GPT-4o mini',       inputPer1M: 0.15,  outputPer1M: 0.60,  contextK: 128   },
         // Google
-        'gemini-25-pro':    { name: 'Gemini 2.5 Pro',    inputPer1M: 1.25,  outputPer1M: 10.00, contextK: 1000 },
-        'gemini-pro':       { name: 'Gemini 1.5 Pro',    inputPer1M: 1.25,  outputPer1M: 5.00,  contextK: 1000 },
-        'gemini-flash':     { name: 'Gemini 2.0 Flash',  inputPer1M: 0.075, outputPer1M: 0.30,  contextK: 1000 },
+        'gemini-25-pro':    { name: 'Gemini 2.5 Pro',    inputPer1M: 1.25,  outputPer1M: 10.00, contextK: 1000  },
+        'gemini-25-flash':  { name: 'Gemini 2.5 Flash',  inputPer1M: 0.30,  outputPer1M: 2.50,  contextK: 1000  },
+        'gemini-20-flash':  { name: 'Gemini 2.0 Flash',  inputPer1M: 0.10,  outputPer1M: 0.40,  contextK: 1000  },
         // DeepSeek
-        'deepseek-v3':      { name: 'DeepSeek V3',       inputPer1M: 0.27,  outputPer1M: 1.10,  contextK: 128  },
-        'deepseek-r1':      { name: 'DeepSeek R1',       inputPer1M: 0.55,  outputPer1M: 2.19,  contextK: 128  },
+        'deepseek-v3':      { name: 'DeepSeek V3.1',     inputPer1M: 0.14,  outputPer1M: 0.28,  contextK: 128   },
+        'deepseek-r1':      { name: 'DeepSeek R1',       inputPer1M: 0.55,  outputPer1M: 2.19,  contextK: 64    },
+        // Meta
+        'llama4-maverick':  { name: 'Llama 4 Maverick',  inputPer1M: 0.15,  outputPer1M: 0.60,  contextK: 512   },
+        'llama4-scout':     { name: 'Llama 4 Scout',     inputPer1M: 0.08,  outputPer1M: 0.30,  contextK: 10000 },
+        // Mistral
+        'mistral-large':    { name: 'Mistral Large 3',   inputPer1M: 2.00,  outputPer1M: 6.00,  contextK: 128   },
+        'mistral-medium':   { name: 'Mistral Medium 3',  inputPer1M: 0.40,  outputPer1M: 2.00,  contextK: 128   },
     };
 
     function estimateTokens(text) {

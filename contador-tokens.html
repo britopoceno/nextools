@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador de Tokens para IA — Claude, GPT-4.1, Gemini, DeepSeek | NexTools</title>
+    <title>Contador de Tokens para IA — Claude, GPT-4.1, Gemini, DeepSeek, Llama 4 | NexTools</title>
     <meta name="description"
-        content="Estime tokens, calcule custo de API e visualize o uso da janela de contexto para 14 modelos: Claude, GPT-4.1, Gemini 2.5 Pro, DeepSeek e mais. Ferramenta gratuita para devs de IA.">
+        content="Estime tokens, calcule custo de API e visualize o uso da janela de contexto para 18 modelos: Claude 4, GPT-4.1, o3, Gemini 2.5, DeepSeek V3.1, Llama 4, Mistral e mais. Gratuito.">
     <meta name="keywords"
         content="contador de tokens IA, calcular tokens GPT, tokens Claude API, custo API IA, janela de contexto, tokens Gemini, nextools">
     <meta name="author" content="NexTools">
@@ -100,26 +100,34 @@
                                 <label for="tk-model" style="font-weight: 500; font-size: 0.9rem; color: var(--text-primary);">Modelo de IA</label>
                                 <select id="tk-model" class="input" style="max-width: 320px;">
                                     <optgroup label="Anthropic">
-                                        <option value="claude-37-sonnet">Claude 3.7 Sonnet ($3.00/M)</option>
-                                        <option value="claude-sonnet">Claude 3.5 Sonnet ($3.00/M)</option>
-                                        <option value="claude-haiku">Claude 3.5 Haiku ($0.80/M)</option>
+                                        <option value="claude-opus-46">Claude Opus 4.6 ($5.00/M)</option>
+                                        <option value="claude-sonnet-46">Claude Sonnet 4.6 ($3.00/M)</option>
+                                        <option value="claude-haiku-45">Claude Haiku 4.5 ($1.00/M)</option>
                                     </optgroup>
                                     <optgroup label="OpenAI">
-                                        <option value="o1">o1 ($15.00/M)</option>
-                                        <option value="o3-mini">o3-mini ($1.10/M)</option>
+                                        <option value="o3">o3 ($2.00/M)</option>
+                                        <option value="o4-mini">o4-mini ($1.10/M)</option>
                                         <option value="gpt41">GPT-4.1 ($2.00/M)</option>
-                                        <option value="gpt4o">GPT-4o ($2.50/M)</option>
                                         <option value="gpt41-mini">GPT-4.1 mini ($0.40/M)</option>
+                                        <option value="gpt4o">GPT-4o ($2.50/M)</option>
                                         <option value="gpt4o-mini">GPT-4o mini ($0.15/M)</option>
                                     </optgroup>
                                     <optgroup label="Google">
                                         <option value="gemini-25-pro">Gemini 2.5 Pro ($1.25/M)</option>
-                                        <option value="gemini-pro">Gemini 1.5 Pro ($1.25/M)</option>
-                                        <option value="gemini-flash">Gemini 2.0 Flash ($0.075/M)</option>
+                                        <option value="gemini-25-flash">Gemini 2.5 Flash ($0.30/M)</option>
+                                        <option value="gemini-20-flash">Gemini 2.0 Flash ($0.10/M)</option>
                                     </optgroup>
                                     <optgroup label="DeepSeek">
-                                        <option value="deepseek-v3">DeepSeek V3 ($0.27/M)</option>
+                                        <option value="deepseek-v3">DeepSeek V3.1 ($0.14/M)</option>
                                         <option value="deepseek-r1">DeepSeek R1 ($0.55/M)</option>
+                                    </optgroup>
+                                    <optgroup label="Meta">
+                                        <option value="llama4-maverick">Llama 4 Maverick ($0.15/M)</option>
+                                        <option value="llama4-scout">Llama 4 Scout ($0.08/M)</option>
+                                    </optgroup>
+                                    <optgroup label="Mistral">
+                                        <option value="mistral-large">Mistral Large 3 ($2.00/M)</option>
+                                        <option value="mistral-medium">Mistral Medium 3 ($0.40/M)</option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -261,7 +269,7 @@
             <p>Nossa ferramenta usa uma heurística calibrada para texto em português: <strong>tokens ≈ palavras × 1,35 + caracteres × 0,05</strong>. Essa fórmula resulta em um erro médio de ~4% em comparação com os tokenizadores reais dos modelos — precisa o suficiente para planejamento de custo e verificação de janela de contexto, sem depender de APIs externas ou bibliotecas pesadas.</p>
 
             <h2>Como comparar custo entre modelos?</h2>
-            <p>O custo varia enormemente entre modelos. O GPT-4o mini e o Gemini 2.0 Flash custam até 40× menos que o Claude 3.5 Sonnet ou o GPT-4o. O DeepSeek V3 e R1 oferecem custo-benefício excepcional para tarefas de raciocínio. Para tarefas simples (classificação, extração, resumo curto), os modelos econômicos têm desempenho equivalente. Com o plano Pro, você vê a tabela comparativa completa de todos os 14 modelos simultaneamente — ideal para escolher o modelo certo para cada tarefa.</p>
+            <p>O custo varia enormemente entre modelos. O Llama 4 Scout ($0.08/M) e o DeepSeek V3.1 ($0.14/M) são os mais econômicos, enquanto o Claude Opus 4.6 e o o3 dominam em raciocínio complexo. O Gemini 2.5 Flash oferece o melhor custo-benefício do Google. Para tarefas simples (classificação, extração, resumo curto), os modelos econômicos têm desempenho equivalente. Com o plano Pro, você vê a tabela comparativa completa de todos os 18 modelos simultaneamente — ideal para escolher o modelo certo para cada tarefa.</p>
         </div>
     </section>
 
