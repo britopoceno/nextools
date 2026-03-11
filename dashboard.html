@@ -165,6 +165,17 @@
 
     <div class="container dashboard-page" style="display: none;" id="dashboard-content">
 
+        <!-- Email verification banner -->
+        <div id="verify-banner" style="display: none; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.28); border-radius: 12px; padding: 16px 20px; margin-bottom: 28px; display: none; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <div>
+                <p style="color: #f59e0b; font-weight: 600; font-size: 0.95rem; margin: 0 0 4px;">Confirme seu e-mail para acessar todos os recursos</p>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">
+                    Enviamos um link para <strong id="verify-email-addr"></strong>. Verifique sua caixa de entrada e a pasta de spam.
+                </p>
+            </div>
+            <button id="btn-resend-verify" class="btn btn-secondary btn-sm" style="white-space: nowrap;">Reenviar e-mail</button>
+        </div>
+
         <div class="dashboard-header">
             <div>
                 <h1 class="user-greeting">Olá, <span id="user-name">Usuário</span></h1>
@@ -239,7 +250,7 @@
 
     <!-- Firebase SDK Scripts -->
     <script type="module">
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
         import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         // Auth initialization happens globally via module imports. 
         // Notice we are relying on auth.js being loaded (or standard initialization)
@@ -289,6 +300,29 @@
                             navigator.clipboard.writeText(fakeKey);
                             copyBtn.textContent = "Copiado!";
                             setTimeout(() => copyBtn.textContent = "Copiar Chave", 2000);
+                        });
+                    }
+                }
+
+                // Show email verification banner if not yet verified
+                if (!user.emailVerified) {
+                    const banner = document.getElementById('verify-banner');
+                    if (banner) {
+                        banner.style.display = 'flex';
+                        document.getElementById('verify-email-addr').textContent = user.email;
+                    }
+                    const resendBtn = document.getElementById('btn-resend-verify');
+                    if (resendBtn) {
+                        resendBtn.addEventListener('click', async () => {
+                            try {
+                                resendBtn.disabled = true;
+                                resendBtn.textContent = 'Enviando...';
+                                await sendEmailVerification(user);
+                                resendBtn.textContent = 'Reenviado!';
+                            } catch {
+                                resendBtn.textContent = 'Tente mais tarde';
+                                resendBtn.disabled = false;
+                            }
                         });
                     }
                 }

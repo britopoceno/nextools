@@ -115,6 +115,20 @@
             <div id="auth-error">Ocorreu um erro ao criar conta.</div>
         </form>
 
+        <!-- Success state: shown after sign-up instead of the form -->
+        <div id="signup-success" style="display: none;">
+            <div style="font-size: 3rem; margin-bottom: 20px;">📧</div>
+            <h2 style="color: var(--text-primary); font-size: 1.3rem; margin-bottom: 12px;">Verifique seu e-mail</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 6px;">
+                Enviamos um link de confirmação para:
+            </p>
+            <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 20px;" id="signup-email-sent"></p>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 24px;">
+                Clique no link do e-mail para ativar sua conta. Verifique também a pasta de spam.
+            </p>
+            <a href="login.html" class="btn btn-primary btn-block">Ir para o Login</a>
+        </div>
+
         <div class="auth-footer">
             Já possui uma conta? <a href="login.html">Fazer login</a>
         </div>

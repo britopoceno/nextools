@@ -109,6 +109,15 @@
             </div>
             <button type="submit" class="btn btn-primary btn-block" id="btn-login">Entrar</button>
             <div id="auth-error">Email ou senha incorretos.</div>
+
+            <!-- Shown when email is not verified -->
+            <div id="verify-notice" style="display: none; margin-top: 12px; padding: 16px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 10px; text-align: left;">
+                <p style="color: #f59e0b; font-size: 0.88rem; font-weight: 600; margin: 0 0 6px;">E-mail não confirmado</p>
+                <p style="color: var(--text-secondary); font-size: 0.83rem; margin: 0 0 14px; line-height: 1.5;">
+                    Verifique sua caixa de entrada e clique no link que enviamos. Confira também o spam.
+                </p>
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-resend-email">Reenviar e-mail de verificação</button>
+            </div>
         </form>
 
         <div class="auth-footer">

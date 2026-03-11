@@ -3,7 +3,8 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut,
-    updateProfile
+    updateProfile,
+    sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import {
     doc,
@@ -19,13 +20,16 @@ import { auth, db } from "./auth-init.js";
 onAuthStateChanged(auth, async (user) => {
     // If we're on a tool page or index, check if we need to apply Pro styles
     if (user) {
-        try {
-            const userDoc = await getDoc(doc(db, "users", user.uid));
-            if (userDoc.exists() && userDoc.data().isPro) {
-                document.body.classList.add('pro-user');
+        // Only grant Pro features to verified accounts
+        if (user.emailVerified) {
+            try {
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists() && userDoc.data().isPro) {
+                    document.body.classList.add('pro-user');
+                }
+            } catch (error) {
+                console.error("Error fetching user role:", error);
             }
-        } catch (error) {
-            console.error("Error fetching user role:", error);
         }
 
         // Update Header Actions
@@ -92,8 +96,20 @@ if (signupForm) {
                 createdAt: new Date()
             });
 
-            // 4. Redirect to Dashboard
-            window.location.href = "dashboard.html";
+            // 4. Send verification email
+            await sendEmailVerification(user);
+
+            // 5. Show success state (email sent) instead of redirecting
+            const signupForm = document.getElementById('signup-form');
+            const successDiv = document.getElementById('signup-success');
+            const emailSentEl = document.getElementById('signup-email-sent');
+            if (signupForm && successDiv) {
+                signupForm.style.display = 'none';
+                if (emailSentEl) emailSentEl.textContent = email;
+                successDiv.style.display = 'block';
+            } else {
+                window.location.href = "dashboard.html";
+            }
 
         } catch (error) {
             errorDiv.textContent = getFriendlyErrorMessage(error.code);
@@ -122,7 +138,36 @@ if (loginForm) {
         errorDiv.style.display = 'none';
 
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            if (!user.emailVerified) {
+                // Show the verification notice block
+                const verifyNotice = document.getElementById('verify-notice');
+                if (verifyNotice) verifyNotice.style.display = 'block';
+
+                // Wire up the resend button (only once)
+                const resendBtn = document.getElementById('btn-resend-email');
+                if (resendBtn && !resendBtn.dataset.wired) {
+                    resendBtn.dataset.wired = '1';
+                    resendBtn.addEventListener('click', async () => {
+                        try {
+                            resendBtn.disabled = true;
+                            resendBtn.textContent = 'Enviando...';
+                            await sendEmailVerification(user);
+                            resendBtn.textContent = 'E-mail reenviado!';
+                        } catch {
+                            resendBtn.textContent = 'Tente novamente mais tarde';
+                            resendBtn.disabled = false;
+                        }
+                    });
+                }
+
+                btn.disabled = false;
+                btn.textContent = "Entrar";
+                return;
+            }
+
             window.location.href = "dashboard.html";
         } catch (error) {
             errorDiv.textContent = getFriendlyErrorMessage(error.code);
