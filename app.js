@@ -1,6 +1,6 @@
 /* ===================================================
    NexTools — Application Logic
-   6 Tools: QR Code, Password, Word Counter, Palette, JSON, Token Counter
+   7 Tools: QR Code, Password, Word Counter, Palette, JSON, Token Counter, Diff Checker
    =================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initColorPalette();
     initJSONFormatter();
     initTokenCounter();
+    initDiffChecker();
     initMobileMenu();
 
     // Pro User - Ad Removal Check (Runs after auth.js might have set the class)
@@ -684,4 +685,301 @@ function initTokenCounter() {
 
     // Initial render
     updateStats();
+}
+
+/* ===================================================
+   7. DIFF CHECKER
+   =================================================== */
+function initDiffChecker() {
+    const leftEl = document.getElementById('diff-left');
+    if (!leftEl) return;
+
+    const rightEl    = document.getElementById('diff-right');
+    const outputEl   = document.getElementById('diff-output');
+    const statsEl    = document.getElementById('diff-stats');
+    const ignoreWsEl = document.getElementById('diff-ignore-ws');
+    const compareBtn = document.getElementById('diff-compare');
+    const clearBtn   = document.getElementById('diff-clear');
+    const copyBtn    = document.getElementById('diff-copy');
+    const sampleBtn  = document.getElementById('diff-sample');
+
+    function normLine(s, ignoreWs) {
+        return ignoreWs ? s.trim().replace(/\s+/g, ' ') : s;
+    }
+
+    function esc(s) {
+        return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // LCS-based line diff — returns ops with original (un-normalized) text
+    function computeLineDiff(aOrig, bOrig, ignoreWs) {
+        const aNorm = aOrig.map(s => normLine(s, ignoreWs));
+        const bNorm = bOrig.map(s => normLine(s, ignoreWs));
+        const m = aNorm.length, n = bNorm.length;
+
+        // Trim common prefix
+        let pre = 0;
+        while (pre < m && pre < n && aNorm[pre] === bNorm[pre]) pre++;
+
+        // Trim common suffix
+        let sufA = m, sufB = n;
+        while (sufA > pre && sufB > pre && aNorm[sufA - 1] === bNorm[sufB - 1]) { sufA--; sufB--; }
+
+        const ops = [];
+        for (let i = 0; i < pre; i++) ops.push({ type: 'equal', left: aOrig[i], right: bOrig[i] });
+
+        // LCS on middle section
+        const aMid = aNorm.slice(pre, sufA);
+        const bMid = bNorm.slice(pre, sufB);
+        const aOrigMid = aOrig.slice(pre, sufA);
+        const bOrigMid = bOrig.slice(pre, sufB);
+        const pm = aMid.length, pn = bMid.length;
+
+        if (pm > 0 || pn > 0) {
+            const dp = Array.from({ length: pm + 1 }, () => new Int32Array(pn + 1));
+            for (let i = 1; i <= pm; i++) {
+                for (let j = 1; j <= pn; j++) {
+                    dp[i][j] = aMid[i - 1] === bMid[j - 1]
+                        ? dp[i - 1][j - 1] + 1
+                        : Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+            const midOps = [];
+            let i = pm, j = pn;
+            while (i > 0 || j > 0) {
+                if (i > 0 && j > 0 && aMid[i - 1] === bMid[j - 1]) {
+                    midOps.push({ type: 'equal', left: aOrigMid[i - 1], right: bOrigMid[j - 1] });
+                    i--; j--;
+                } else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) {
+                    midOps.push({ type: 'insert', right: bOrigMid[j - 1] });
+                    j--;
+                } else {
+                    midOps.push({ type: 'delete', left: aOrigMid[i - 1] });
+                    i--;
+                }
+            }
+            midOps.reverse().forEach(op => ops.push(op));
+        }
+
+        // Common suffix
+        for (let i = sufA; i < m; i++) ops.push({ type: 'equal', left: aOrig[i], right: bOrig[i - sufA + sufB] });
+        return ops;
+    }
+
+    // Character-level diff for Pro inline highlighting
+    function computeCharDiff(a, b) {
+        if ((a.length + b.length) > 600) return null; // Skip for very long lines
+        const m = a.length, n = b.length;
+        const dp = Array.from({ length: m + 1 }, () => new Int32Array(n + 1));
+        for (let i = 1; i <= m; i++) {
+            for (let j = 1; j <= n; j++) {
+                dp[i][j] = a[i - 1] === b[j - 1]
+                    ? dp[i - 1][j - 1] + 1
+                    : Math.max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+        const ops = [];
+        let i = m, j = n;
+        while (i > 0 || j > 0) {
+            if (i > 0 && j > 0 && a[i - 1] === b[j - 1]) { ops.push({ t: '=', c: a[i - 1] }); i--; j--; }
+            else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) { ops.push({ t: '+', c: b[j - 1] }); j--; }
+            else { ops.push({ t: '-', c: a[i - 1] }); i--; }
+        }
+        return ops.reverse();
+    }
+
+    // Render one side of a char diff op list
+    function renderInline(charOps, side) {
+        if (!charOps) return null;
+        return charOps.map(op => {
+            const c = esc(op.c);
+            if (op.t === '=') return c;
+            if (op.t === '-' && side === 'left')  return `<mark class="diff-ic-del">${c}</mark>`;
+            if (op.t === '+' && side === 'right') return `<mark class="diff-ic-ins">${c}</mark>`;
+            return ''; // char doesn't exist on this side
+        }).join('');
+    }
+
+    function runDiff() {
+        const ignoreWs = ignoreWsEl ? ignoreWsEl.checked : false;
+        const leftText  = leftEl.value;
+        const rightText = rightEl.value;
+
+        if (!leftText.trim() && !rightText.trim()) {
+            outputEl.innerHTML = '<p class="diff-placeholder">Cole o texto nos dois campos acima e clique em <strong>Comparar</strong>.</p>';
+            statsEl.style.display = 'none';
+            return;
+        }
+
+        const aOrig = leftText.split('\n');
+        const bOrig = rightText.split('\n');
+
+        if (aOrig.length > 3000 || bOrig.length > 3000) {
+            outputEl.innerHTML = '<p class="diff-error">Texto muito longo. Máximo de 3.000 linhas por campo.</p>';
+            return;
+        }
+
+        const ops = computeLineDiff(aOrig, bOrig, ignoreWs);
+
+        if (!ops.some(op => op.type !== 'equal')) {
+            outputEl.innerHTML = '<p class="diff-identical">✓ Os textos são idênticos.</p>';
+            statsEl.style.display = 'none';
+            return;
+        }
+
+        const proUser  = document.body.classList.contains('pro-user');
+        const inlineEl = document.getElementById('diff-inline');
+        const useInline = proUser && inlineEl && inlineEl.checked;
+
+        // Pair consecutive delete+insert sequences (= changed lines)
+        const paired = [];
+        let k = 0;
+        while (k < ops.length) {
+            if (ops[k].type === 'delete') {
+                const dels = [], ins = [];
+                while (k < ops.length && ops[k].type === 'delete') dels.push(ops[k++]);
+                while (k < ops.length && ops[k].type === 'insert') ins.push(ops[k++]);
+                const max = Math.max(dels.length, ins.length);
+                for (let p = 0; p < max; p++) {
+                    paired.push({ type: 'change', del: dels[p] || null, ins: ins[p] || null });
+                }
+            } else {
+                paired.push(ops[k++]);
+            }
+        }
+
+        // Count stats
+        let added = 0, removed = 0, changed = 0;
+        paired.forEach(op => {
+            if (op.type === 'change') {
+                if (op.del && op.ins) changed++;
+                else if (op.del) removed++;
+                else added++;
+            } else if (op.type === 'insert') { added++; }
+        });
+
+        // Build table rows
+        let leftLn = 1, rightLn = 1, rows = '';
+
+        paired.forEach(op => {
+            if (op.type === 'equal') {
+                const c = esc(op.left);
+                rows += `<tr>
+                    <td class="diff-ln">${leftLn++}</td><td class="diff-code">${c}</td>
+                    <td class="diff-ln">${rightLn++}</td><td class="diff-code">${c}</td>
+                </tr>`;
+            } else if (op.type === 'change') {
+                const lln = op.del ? leftLn++  : '';
+                const rln = op.ins ? rightLn++ : '';
+                let leftCell  = op.del ? esc(op.del.left)  : '';
+                let rightCell = op.ins ? esc(op.ins.right) : '';
+
+                if (useInline && op.del && op.ins) {
+                    const charOps = computeCharDiff(op.del.left, op.ins.right);
+                    leftCell  = renderInline(charOps, 'left')  || esc(op.del.left);
+                    rightCell = renderInline(charOps, 'right') || esc(op.ins.right);
+                }
+
+                rows += `<tr>
+                    <td class="diff-ln ${op.del ? 'diff-ln-del' : 'diff-empty'}">${lln}</td>
+                    <td class="diff-code ${op.del ? 'diff-del-cell' : 'diff-empty'}">${leftCell}</td>
+                    <td class="diff-ln ${op.ins ? 'diff-ln-ins' : 'diff-empty'}">${rln}</td>
+                    <td class="diff-code ${op.ins ? 'diff-ins-cell' : 'diff-empty'}">${rightCell}</td>
+                </tr>`;
+            } else if (op.type === 'insert') {
+                rows += `<tr>
+                    <td class="diff-ln diff-empty"></td><td class="diff-code diff-empty"></td>
+                    <td class="diff-ln diff-ln-ins">${rightLn++}</td>
+                    <td class="diff-code diff-ins-cell">${esc(op.right)}</td>
+                </tr>`;
+            }
+        });
+
+        outputEl.innerHTML = `<div class="diff-wrap"><table class="diff-table">
+            <colgroup><col style="width:42px"><col><col style="width:42px"><col></colgroup>
+            <thead><tr>
+                <th colspan="2" class="diff-head diff-head-left">Original</th>
+                <th colspan="2" class="diff-head diff-head-right">Modificado</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+        </table></div>`;
+
+        statsEl.innerHTML = `
+            <span class="ds-add">+${added} adicionada${added !== 1 ? 's' : ''}</span>
+            <span class="ds-rem">-${removed} removida${removed !== 1 ? 's' : ''}</span>
+            <span class="ds-chg">~${changed} alterada${changed !== 1 ? 's' : ''}</span>`;
+        statsEl.style.display = 'flex';
+    }
+
+    compareBtn.addEventListener('click', runDiff);
+
+    ignoreWsEl && ignoreWsEl.addEventListener('change', () => {
+        if (outputEl.querySelector('table')) runDiff();
+    });
+
+    clearBtn.addEventListener('click', () => {
+        leftEl.value = ''; rightEl.value = '';
+        outputEl.innerHTML = '<p class="diff-placeholder">Cole o texto nos dois campos acima e clique em <strong>Comparar</strong>.</p>';
+        statsEl.style.display = 'none';
+    });
+
+    copyBtn.addEventListener('click', () => {
+        const ignoreWs = ignoreWsEl ? ignoreWsEl.checked : false;
+        const ops = computeLineDiff(leftEl.value.split('\n'), rightEl.value.split('\n'), ignoreWs);
+        const unified = ops.map(op => {
+            if (op.type === 'equal')  return '  ' + op.left;
+            if (op.type === 'delete') return '- ' + op.left;
+            if (op.type === 'insert') return '+ ' + op.right;
+        }).join('\n');
+        navigator.clipboard.writeText(unified).then(() => showToast('Diff copiado!'));
+    });
+
+    sampleBtn && sampleBtn.addEventListener('click', () => {
+        leftEl.value  = `function saudacao(nome) {\n  const msg = "Olá, " + nome + "!";\n  console.log(msg);\n  return msg;\n}\n\nconst resultado = saudacao("Mundo");\nconsole.log(resultado);`;
+        rightEl.value = `function saudacao(nome, titulo = "") {\n  const msg = \`Olá, \${titulo}\${nome}!\`;\n  console.log(msg);\n  return msg;\n}\n\nconst resultado = saudacao("Mundo", "Dr. ");\nconsole.log("Resultado:", resultado);`;
+        runDiff();
+    });
+
+    // Ctrl+Enter shortcut
+    [leftEl, rightEl].forEach(el => {
+        el.addEventListener('keydown', e => { if (e.ctrlKey && e.key === 'Enter') runDiff(); });
+    });
+
+    // Pro features (loaded after auth check)
+    setTimeout(() => {
+        const inlineEl = document.getElementById('diff-inline');
+        if (inlineEl) {
+            inlineEl.addEventListener('change', () => {
+                if (outputEl.querySelector('table')) runDiff();
+            });
+        }
+
+        const exportBtn = document.getElementById('diff-export-html');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => {
+                if (!outputEl.querySelector('table')) {
+                    showToast('Nenhum diff para exportar.');
+                    return;
+                }
+                const html = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
+<title>Diff — NexTools</title><style>
+body{font-family:monospace;font-size:13px;margin:0}
+table{width:100%;border-collapse:collapse}
+td,th{padding:3px 10px;border:1px solid #e0e0e0;white-space:pre-wrap;word-break:break-all}
+.diff-ln{color:#888;text-align:right;background:#f9f9f9;border-right:2px solid #e0e0e0;user-select:none;width:40px;font-size:11px}
+.diff-ln-del{background:#fff0f0}.diff-ln-ins{background:#f0fff4}
+.diff-del-cell{background:#ffeef0}.diff-ins-cell{background:#e6ffed}.diff-empty{background:#fafafa}
+.diff-head{padding:6px 10px;font-weight:bold;font-family:sans-serif;font-size:12px}
+.diff-head-left{background:#ffeef0;color:#c00}.diff-head-right{background:#e6ffed;color:#060}
+.diff-ic-del{background:#ffc0c0;border-radius:2px}.diff-ic-ins{background:#a0f0b0;border-radius:2px}
+</style></head><body>${outputEl.innerHTML}</body></html>`;
+                const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url; a.download = 'diff-nextools.html'; a.click();
+                URL.revokeObjectURL(url);
+                showToast('HTML exportado!');
+            });
+        }
+    }, 600);
 }

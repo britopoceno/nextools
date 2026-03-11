@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diff Checker — Comparador de Texto Online Grátis | NexTools</title>
+    <meta name="description"
+        content="Compare dois textos e veja exatamente o que mudou: linhas adicionadas, removidas e alteradas destacadas em cores. Diff online gratuito, funciona no navegador.">
+    <meta name="keywords"
+        content="diff checker, comparar texto online, diff online, diferença entre textos, ferramenta diff, comparador de código, nextools">
+    <meta name="author" content="NexTools">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://nextools.com.br/diff-checker.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Diff Checker — Comparador de Texto Online | NexTools">
+    <meta property="og:description"
+        content="Compare dois textos e veja exatamente o que mudou. Linhas adicionadas, removidas e alteradas destacadas. Grátis e sem cadastro.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nextools.com.br/diff-checker.html">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Diff Checker — NexTools",
+        "url": "https://nextools.com.br/diff-checker.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+        "description": "Compare dois textos e veja exatamente o que mudou, com linhas adicionadas e removidas destacadas em cores."
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5750194644744805"
+        crossorigin="anonymous"></script>
+
+    <style>
+        /* Diff inputs */
+        .diff-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 640px) {
+            .diff-inputs { grid-template-columns: 1fr; }
+        }
+        .diff-input-header {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .diff-input-header.left  { color: #ef4444; }
+        .diff-input-header.right { color: #22c55e; }
+
+        /* Options row */
+        .diff-options {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .diff-options-right { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+
+        /* Stats bar */
+        .diff-stats {
+            display: none;
+            gap: 16px;
+            align-items: center;
+            padding: 10px 0 14px;
+            flex-wrap: wrap;
+        }
+        .ds-add { color: #22c55e; font-weight: 600; font-size: 0.88rem; }
+        .ds-rem { color: #ef4444; font-weight: 600; font-size: 0.88rem; }
+        .ds-chg { color: #f59e0b; font-weight: 600; font-size: 0.88rem; }
+
+        /* Diff table */
+        .diff-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+        }
+        .diff-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.81rem;
+            line-height: 1.5;
+        }
+        .diff-table tbody tr:hover { filter: brightness(1.06); }
+        .diff-ln {
+            width: 42px;
+            min-width: 42px;
+            text-align: right;
+            padding: 2px 8px;
+            color: var(--text-secondary);
+            background: rgba(255,255,255,0.025);
+            border-right: 1px solid var(--border-color);
+            user-select: none;
+            font-size: 0.75rem;
+            vertical-align: top;
+        }
+        .diff-ln-del { background: rgba(239,68,68,0.12); }
+        .diff-ln-ins { background: rgba(34,197,94,0.1); }
+        .diff-code { padding: 2px 12px; white-space: pre-wrap; word-break: break-all; vertical-align: top; }
+        .diff-del-cell { background: rgba(239,68,68,0.1); }
+        .diff-ins-cell { background: rgba(34,197,94,0.09); }
+        .diff-empty { background: rgba(255,255,255,0.015); }
+        .diff-head {
+            padding: 8px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-align: left;
+            font-family: var(--font-body);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .diff-head-left  { background: rgba(239,68,68,0.08); color: #ef4444; }
+        .diff-head-right { background: rgba(34,197,94,0.07); color: #22c55e; }
+
+        /* Inline char-level highlights */
+        .diff-ic-del { background: rgba(239,68,68,0.45); border-radius: 2px; }
+        .diff-ic-ins { background: rgba(34,197,94,0.4);  border-radius: 2px; }
+
+        /* State messages */
+        .diff-placeholder, .diff-identical, .diff-error {
+            text-align: center;
+            padding: 32px 16px;
+            font-size: 0.95rem;
+        }
+        .diff-placeholder { color: var(--text-secondary); }
+        .diff-identical   { color: #22c55e; font-weight: 500; }
+        .diff-error       { color: #ef4444; }
+
+        /* Sample button */
+        .diff-sample { font-size: 0.8rem; color: var(--accent-3); background: none; border: none; cursor: pointer; padding: 0; text-decoration: underline; }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html#tools" class="nav-link">Ferramentas</a>
+                <a href="index.html#pricing" class="nav-link">Preços</a>
+                <a href="index.html#faq" class="nav-link">FAQ</a>
+                <a href="index.html#pricing" class="btn btn-primary btn-sm mobile-only">Upgrade Pro ✨</a>
+            </nav>
+            <div class="header-actions">
+                <a href="index.html#pricing" class="btn btn-primary btn-sm desktop-only">Upgrade Pro ✨</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="container breadcrumb">
+        <a href="index.html">← Voltar para Ferramentas</a>
+    </div>
+
+    <!-- ===== TOOL SECTION ===== -->
+    <section class="tools-section" id="tools" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Diff <span class="gradient-text">Checker</span></h1>
+            </div>
+
+            <div class="tool-panels">
+                <div class="tool-panel active" id="panel-diff">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Comparador de Texto</h3>
+                            <p>Cole os dois textos abaixo e veja exatamente o que mudou, linha por linha</p>
+                        </div>
+                        <div class="tool-card-body">
+
+                            <!-- Two textareas -->
+                            <div class="diff-inputs">
+                                <div>
+                                    <div class="diff-input-header left">Original</div>
+                                    <textarea id="diff-left" class="input textarea" rows="10"
+                                        placeholder="Cole o texto original aqui..."></textarea>
+                                </div>
+                                <div>
+                                    <div class="diff-input-header right">Modificado</div>
+                                    <textarea id="diff-right" class="input textarea" rows="10"
+                                        placeholder="Cole o texto modificado aqui..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Options row -->
+                            <div class="diff-options">
+                                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--text-secondary); cursor: pointer;">
+                                    <input type="checkbox" id="diff-ignore-ws"> Ignorar espaços em branco
+                                </label>
+                                <button class="diff-sample" id="diff-sample">Inserir exemplo</button>
+                                <div class="diff-options-right">
+                                    <button class="btn btn-secondary btn-sm" id="diff-clear">Limpar</button>
+                                    <button class="btn btn-secondary btn-sm" id="diff-copy">Copiar diff</button>
+                                    <button class="btn btn-primary btn-sm" id="diff-compare">Comparar</button>
+                                </div>
+                            </div>
+
+                            <!-- Stats -->
+                            <div class="diff-stats" id="diff-stats">
+                                <!-- filled by JS -->
+                            </div>
+
+                            <!-- Output -->
+                            <div id="diff-output">
+                                <p class="diff-placeholder">Cole o texto nos dois campos acima e clique em <strong>Comparar</strong>.<br>
+                                    Atalho: <kbd style="font-size:0.8rem; background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px;">Ctrl+Enter</kbd> em qualquer campo.</p>
+                            </div>
+
+                            <!-- Pro Feature Lock -->
+                            <div class="pro-feature-lock" id="diff-pro-lock"
+                                style="margin-top: 24px; padding: 20px; background: rgba(124,58,237,0.08); border: 1px dashed var(--accent-1); border-radius: 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Recursos Avançados</span>
+                                    <span class="plan-badge plan-pro" style="font-size: 0.7rem; padding: 2px 8px;">PRO</span>
+                                </div>
+                                <input type="hidden" id="diff-pro-enabled" disabled>
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">
+                                    Diff inline por caractere (destaca exatamente qual trecho mudou dentro de cada linha) e exportação do resultado em HTML.
+                                    <a href="index.html#pricing" style="color: var(--accent-1);">Faça upgrade</a> para liberar.
+                                </p>
+
+                                <!-- Pro content -->
+                                <div id="diff-pro-content" style="display: none; margin-top: 16px;">
+                                    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                                        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--text-secondary); cursor: pointer;">
+                                            <input type="checkbox" id="diff-inline" checked> Diff inline por caractere
+                                        </label>
+                                        <button class="btn btn-secondary btn-sm" id="diff-export-html">⬇ Exportar HTML</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AD BANNER MIDDLE ===== -->
+    <div class="ad-slot" id="ad-middle">
+        <div class="ad-placeholder">
+            <span>Anúncio — <a href="https://www.google.com/adsense" target="_blank">Google AdSense</a></span>
+        </div>
+    </div>
+
+    <!-- ===== CONTENT SECTION (SEO) ===== -->
+    <section class="content-section">
+        <div class="container">
+            <h2>O que é um Diff Checker?</h2>
+            <p>Um diff checker (ou comparador de texto) é uma ferramenta que compara dois textos linha por linha e destaca as diferenças: linhas adicionadas, removidas e alteradas. O nome "diff" vem do comando Unix de mesmo nome, usado há décadas por desenvolvedores para comparar versões de código-fonte.</p>
+
+            <h2>Quando usar o Diff Checker?</h2>
+            <ul>
+                <li><strong>Revisar pull requests</strong> — compare o código antes e depois de uma mudança.</li>
+                <li><strong>Comparar rascunhos</strong> — encontre diferenças entre versões de um documento, e-mail ou artigo.</li>
+                <li><strong>Validar configurações</strong> — verifique o que mudou em arquivos JSON, YAML ou .env.</li>
+                <li><strong>Detectar alterações inesperadas</strong> — identifique modificações em contratos, laudos ou textos legais.</li>
+            </ul>
+
+            <h2>Como funciona o algoritmo de diff?</h2>
+            <p>Nossa ferramenta implementa um algoritmo baseado em <strong>LCS (Longest Common Subsequence)</strong> com otimização de prefixo e sufixo comuns — a mesma abordagem usada por ferramentas como Git e GNU diff. O resultado é um diff preciso que minimiza o número de operações (adições e remoções) necessárias para transformar o texto original no texto modificado. Com o plano Pro, o diff também é calculado a nível de <strong>caractere</strong> dentro de cada linha, destacando exatamente qual trecho foi alterado.</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+                <p class="footer-tagline">Ferramentas online rápidas e poderosas.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#tools">Ferramentas</a>
+                <a href="index.html#pricing">Preços</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="termos.html">Termos</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-message">Copiado!</span>
+    </div>
+
+    <script src="app.js"></script>
+    <script type="module" src="auth.js"></script>
+</body>
+
+</html>
