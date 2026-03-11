@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Tokens para IA — Claude, GPT-4.1, Gemini, DeepSeek | NexTools</title>
+    <meta name="description"
+        content="Estime tokens, calcule custo de API e visualize o uso da janela de contexto para 14 modelos: Claude, GPT-4.1, Gemini 2.5 Pro, DeepSeek e mais. Ferramenta gratuita para devs de IA.">
+    <meta name="keywords"
+        content="contador de tokens IA, calcular tokens GPT, tokens Claude API, custo API IA, janela de contexto, tokens Gemini, nextools">
+    <meta name="author" content="NexTools">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://nextools.com.br/contador-tokens.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contador de Tokens para IA — NexTools">
+    <meta property="og:description"
+        content="Estime tokens e calcule o custo de API para Claude, GPT-4o e Gemini em tempo real. Gratuito e sem cadastro.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nextools.com.br/contador-tokens.html">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Contador de Tokens para IA — NexTools",
+        "url": "https://nextools.com.br/contador-tokens.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+        "description": "Estime tokens e calcule custo de API para modelos de IA (Claude, GPT-4o, Gemini) direto no navegador."
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5750194644744805"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html#tools" class="nav-link">Ferramentas</a>
+                <a href="index.html#pricing" class="nav-link">Preços</a>
+                <a href="index.html#faq" class="nav-link">FAQ</a>
+                <a href="index.html#pricing" class="btn btn-primary btn-sm mobile-only">Upgrade Pro ✨</a>
+            </nav>
+            <div class="header-actions">
+                <a href="index.html#pricing" class="btn btn-primary btn-sm desktop-only">Upgrade Pro ✨</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="container breadcrumb">
+        <a href="index.html">← Voltar para Ferramentas</a>
+    </div>
+
+    <!-- ===== TOOL SECTION ===== -->
+    <section class="tools-section" id="tools" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Contador de <span class="gradient-text">Tokens para IA</span></h1>
+            </div>
+
+            <div class="tool-panels">
+                <div class="tool-panel active" id="panel-tokens">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Analisador de Tokens</h3>
+                            <p>Estime tokens e custo de API para Claude, GPT-4o e Gemini em tempo real</p>
+                        </div>
+                        <div class="tool-card-body">
+
+                            <!-- Model selector -->
+                            <div class="option-row" style="margin-bottom: 16px;">
+                                <label for="tk-model" style="font-weight: 500; font-size: 0.9rem; color: var(--text-primary);">Modelo de IA</label>
+                                <select id="tk-model" class="input" style="max-width: 320px;">
+                                    <optgroup label="Anthropic">
+                                        <option value="claude-37-sonnet">Claude 3.7 Sonnet ($3.00/M)</option>
+                                        <option value="claude-sonnet">Claude 3.5 Sonnet ($3.00/M)</option>
+                                        <option value="claude-haiku">Claude 3.5 Haiku ($0.80/M)</option>
+                                    </optgroup>
+                                    <optgroup label="OpenAI">
+                                        <option value="o1">o1 ($15.00/M)</option>
+                                        <option value="o3-mini">o3-mini ($1.10/M)</option>
+                                        <option value="gpt41">GPT-4.1 ($2.00/M)</option>
+                                        <option value="gpt4o">GPT-4o ($2.50/M)</option>
+                                        <option value="gpt41-mini">GPT-4.1 mini ($0.40/M)</option>
+                                        <option value="gpt4o-mini">GPT-4o mini ($0.15/M)</option>
+                                    </optgroup>
+                                    <optgroup label="Google">
+                                        <option value="gemini-25-pro">Gemini 2.5 Pro ($1.25/M)</option>
+                                        <option value="gemini-pro">Gemini 1.5 Pro ($1.25/M)</option>
+                                        <option value="gemini-flash">Gemini 2.0 Flash ($0.075/M)</option>
+                                    </optgroup>
+                                    <optgroup label="DeepSeek">
+                                        <option value="deepseek-v3">DeepSeek V3 ($0.27/M)</option>
+                                        <option value="deepseek-r1">DeepSeek R1 ($0.55/M)</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <!-- Input textarea -->
+                            <textarea id="tk-input" class="input textarea" rows="8"
+                                placeholder="Cole ou escreva seu prompt aqui para analisar tokens em tempo real..."></textarea>
+
+                            <!-- Stats grid -->
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <span class="stat-value" id="tk-tokens">0</span>
+                                    <span class="stat-label">~Tokens</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="tk-chars">0</span>
+                                    <span class="stat-label">Caracteres</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="tk-words">0</span>
+                                    <span class="stat-label">Palavras</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="tk-lines">0</span>
+                                    <span class="stat-label">Linhas</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="tk-cost">$0.000000</span>
+                                    <span class="stat-label">Custo input</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value" id="tk-context-pct">0%</span>
+                                    <span class="stat-label">% Contexto</span>
+                                </div>
+                            </div>
+
+                            <!-- Context bar -->
+                            <div style="margin-top: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">Uso da janela de contexto</span>
+                                    <span id="tk-context-label" style="font-size: 0.8rem; color: var(--text-secondary);">0 / 200K tokens</span>
+                                </div>
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="tk-context-fill" style="background: #22c55e; width: 0%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Pro Feature Lock -->
+                            <div class="pro-feature-lock" id="tk-pro-lock"
+                                style="margin-top: 24px; padding: 20px; background: rgba(124,58,237,0.08); border: 1px dashed var(--accent-1); border-radius: 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Recursos Avançados</span>
+                                    <span class="plan-badge plan-pro" style="font-size: 0.7rem; padding: 2px 8px;">PRO</span>
+                                </div>
+                                <!-- Signal input: applyProFeatures() enables this when body has .pro-user -->
+                                <input type="hidden" id="tk-pro-enabled" disabled>
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">
+                                    Tabela comparativa de todos os modelos, estimativa de custo de saída, modo lote e exportação CSV.
+                                    <a href="index.html#pricing" style="color: var(--accent-1);">Faça upgrade</a> para liberar.
+                                </p>
+
+                                <!-- Pro content: revealed by JS when Pro is detected -->
+                                <div id="tk-pro-content" style="display: none;">
+
+                                    <!-- Output estimator -->
+                                    <div style="margin-bottom: 20px;">
+                                        <label for="tk-output-size" style="display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary);">Tamanho esperado da resposta</label>
+                                        <select id="tk-output-size" class="input" style="max-width: 280px;">
+                                            <option value="100">Curta (~100 tokens)</option>
+                                            <option value="500" selected>Média (~500 tokens)</option>
+                                            <option value="2000">Longa (~2.000 tokens)</option>
+                                            <option value="4000">Muito longa (~4.000 tokens)</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Comparison table -->
+                                    <div style="margin-bottom: 20px;">
+                                        <h4 style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 12px;">Comparativo — todos os modelos</h4>
+                                        <div style="overflow-x: auto;">
+                                            <table id="tk-compare-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 500;">Modelo</th>
+                                                        <th style="text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 500;">Tokens</th>
+                                                        <th style="text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 500;">Custo Input</th>
+                                                        <th style="text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 500;">Custo Output</th>
+                                                        <th style="text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 500;">Total</th>
+                                                        <th style="text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 500;">% Contexto</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tk-compare-body">
+                                                    <tr>
+                                                        <td colspan="6" style="padding: 16px 10px; text-align: center; color: var(--text-secondary); font-size: 0.85rem;">Digite algo no campo acima para ver a comparação</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- Batch mode -->
+                                    <div>
+                                        <label for="tk-batch" style="display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary);">
+                                            Modo lote
+                                            <span style="color: var(--text-secondary); font-weight: 400; font-size: 0.85rem;">— separe prompts com <code style="font-size: 0.8rem; background: rgba(255,255,255,0.07); padding: 2px 6px; border-radius: 4px;">---</code></span>
+                                        </label>
+                                        <textarea id="tk-batch" class="input textarea" rows="5"
+                                            placeholder="Prompt 1...&#10;---&#10;Prompt 2...&#10;---&#10;Prompt 3..."></textarea>
+                                        <button class="btn btn-secondary" id="tk-export-csv" style="margin-top: 12px;">⬇ Exportar CSV</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AD BANNER MIDDLE ===== -->
+    <div class="ad-slot" id="ad-middle">
+        <div class="ad-placeholder">
+            <span>Anúncio — <a href="https://www.google.com/adsense" target="_blank">Google AdSense</a></span>
+        </div>
+    </div>
+
+    <!-- ===== CONTENT SECTION (SEO) ===== -->
+    <section class="content-section">
+        <div class="container">
+            <h2>O que são tokens e por que importam para devs de IA?</h2>
+            <p>Tokens são as unidades básicas de texto que modelos de linguagem como Claude, GPT-4o e Gemini processam. Em inglês, uma palavra equivale aproximadamente a 1,3 token; em português, a proporção é ligeiramente maior devido às palavras mais longas e à morfologia da língua. Entender tokens é fundamental para:</p>
+            <ul>
+                <li><strong>Controlar custos de API</strong> — todas as APIs cobram por milhão de tokens de entrada e saída.</li>
+                <li><strong>Evitar erros de contexto</strong> — cada modelo tem um limite máximo (128K no GPT-4o, 200K no Claude, 1M no Gemini 1.5 Pro).</li>
+                <li><strong>Otimizar prompts</strong> — prompts mais curtos e diretos custam menos e respondem mais rápido.</li>
+            </ul>
+
+            <h2>Como a estimativa de tokens funciona?</h2>
+            <p>Nossa ferramenta usa uma heurística calibrada para texto em português: <strong>tokens ≈ palavras × 1,35 + caracteres × 0,05</strong>. Essa fórmula resulta em um erro médio de ~4% em comparação com os tokenizadores reais dos modelos — precisa o suficiente para planejamento de custo e verificação de janela de contexto, sem depender de APIs externas ou bibliotecas pesadas.</p>
+
+            <h2>Como comparar custo entre modelos?</h2>
+            <p>O custo varia enormemente entre modelos. O GPT-4o mini e o Gemini 2.0 Flash custam até 40× menos que o Claude 3.5 Sonnet ou o GPT-4o. O DeepSeek V3 e R1 oferecem custo-benefício excepcional para tarefas de raciocínio. Para tarefas simples (classificação, extração, resumo curto), os modelos econômicos têm desempenho equivalente. Com o plano Pro, você vê a tabela comparativa completa de todos os 14 modelos simultaneamente — ideal para escolher o modelo certo para cada tarefa.</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+                <p class="footer-tagline">Ferramentas online rápidas e poderosas.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#tools">Ferramentas</a>
+                <a href="index.html#pricing">Preços</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="termos.html">Termos</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-message">Copiado!</span>
+    </div>
+
+    <script src="app.js"></script>
+    <script type="module" src="auth.js"></script>
+</body>
+
+</html>

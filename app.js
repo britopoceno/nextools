@@ -1,6 +1,6 @@
 /* ===================================================
    NexTools — Application Logic
-   5 Tools: QR Code, Password, Word Counter, Palette, JSON
+   6 Tools: QR Code, Password, Word Counter, Palette, JSON, Token Counter
    =================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initWordCounter();
     initColorPalette();
     initJSONFormatter();
+    initTokenCounter();
     initMobileMenu();
 
     // Pro User - Ad Removal Check (Runs after auth.js might have set the class)
@@ -496,4 +497,185 @@ function initJSONFormatter() {
             copyToClipboard(text);
         }
     });
+}
+
+/* ===== 6. TOKEN COUNTER ===== */
+function initTokenCounter() {
+    const textarea = document.getElementById('tk-input');
+    if (!textarea) return;
+
+    const modelSelect = document.getElementById('tk-model');
+    const tokensEl = document.getElementById('tk-tokens');
+    const charsEl = document.getElementById('tk-chars');
+    const wordsEl = document.getElementById('tk-words');
+    const linesEl = document.getElementById('tk-lines');
+    const costEl = document.getElementById('tk-cost');
+    const contextPctEl = document.getElementById('tk-context-pct');
+    const contextFill = document.getElementById('tk-context-fill');
+    const contextLabel = document.getElementById('tk-context-label');
+
+    const MODELS = {
+        // Anthropic
+        'claude-37-sonnet': { name: 'Claude 3.7 Sonnet', inputPer1M: 3.00,  outputPer1M: 15.00, contextK: 200  },
+        'claude-sonnet':    { name: 'Claude 3.5 Sonnet', inputPer1M: 3.00,  outputPer1M: 15.00, contextK: 200  },
+        'claude-haiku':     { name: 'Claude 3.5 Haiku',  inputPer1M: 0.80,  outputPer1M: 4.00,  contextK: 200  },
+        // OpenAI
+        'o1':               { name: 'o1',                inputPer1M: 15.00, outputPer1M: 60.00, contextK: 200  },
+        'o3-mini':          { name: 'o3-mini',           inputPer1M: 1.10,  outputPer1M: 4.40,  contextK: 200  },
+        'gpt41':            { name: 'GPT-4.1',           inputPer1M: 2.00,  outputPer1M: 8.00,  contextK: 1000 },
+        'gpt4o':            { name: 'GPT-4o',            inputPer1M: 2.50,  outputPer1M: 10.00, contextK: 128  },
+        'gpt41-mini':       { name: 'GPT-4.1 mini',      inputPer1M: 0.40,  outputPer1M: 1.60,  contextK: 1000 },
+        'gpt4o-mini':       { name: 'GPT-4o mini',       inputPer1M: 0.15,  outputPer1M: 0.60,  contextK: 128  },
+        // Google
+        'gemini-25-pro':    { name: 'Gemini 2.5 Pro',    inputPer1M: 1.25,  outputPer1M: 10.00, contextK: 1000 },
+        'gemini-pro':       { name: 'Gemini 1.5 Pro',    inputPer1M: 1.25,  outputPer1M: 5.00,  contextK: 1000 },
+        'gemini-flash':     { name: 'Gemini 2.0 Flash',  inputPer1M: 0.075, outputPer1M: 0.30,  contextK: 1000 },
+        // DeepSeek
+        'deepseek-v3':      { name: 'DeepSeek V3',       inputPer1M: 0.27,  outputPer1M: 1.10,  contextK: 128  },
+        'deepseek-r1':      { name: 'DeepSeek R1',       inputPer1M: 0.55,  outputPer1M: 2.19,  contextK: 128  },
+    };
+
+    function estimateTokens(text) {
+        if (!text.trim()) return 0;
+        const words = text.trim().split(/\s+/).length;
+        return Math.round(words * 1.35 + text.length * 0.05);
+    }
+
+    function formatCost(dollars) {
+        if (dollars < 0.0001) return '$' + dollars.toFixed(6);
+        if (dollars < 0.01)   return '$' + dollars.toFixed(4);
+        return '$' + dollars.toFixed(4);
+    }
+
+    function contextWindowLabel(model) {
+        return model.contextK >= 1000
+            ? (model.contextK / 1000) + 'M'
+            : model.contextK + 'K';
+    }
+
+    function updateStats() {
+        const text = textarea.value;
+        const model = MODELS[modelSelect.value];
+
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        const chars = text.length;
+        const lines = text ? text.split('\n').length : 0;
+        const tokens = estimateTokens(text);
+
+        const inputCost = (tokens / 1_000_000) * model.inputPer1M;
+        const contextPct = Math.min((tokens / (model.contextK * 1000)) * 100, 100);
+
+        tokensEl.textContent = tokens.toLocaleString('pt-BR');
+        charsEl.textContent = chars.toLocaleString('pt-BR');
+        wordsEl.textContent = words.toLocaleString('pt-BR');
+        linesEl.textContent = lines.toLocaleString('pt-BR');
+        costEl.textContent = formatCost(inputCost);
+        contextPctEl.textContent = contextPct.toFixed(1) + '%';
+
+        contextLabel.textContent = tokens.toLocaleString('pt-BR') + ' / ' + contextWindowLabel(model) + ' tokens';
+        contextFill.style.width = contextPct + '%';
+        if (contextPct < 50) {
+            contextFill.style.background = '#22c55e';
+        } else if (contextPct < 80) {
+            contextFill.style.background = '#eab308';
+        } else {
+            contextFill.style.background = '#ef4444';
+        }
+
+        updateCompareTable(tokens);
+    }
+
+    function updateCompareTable(inputTokens) {
+        const proContent = document.getElementById('tk-pro-content');
+        if (!proContent || proContent.style.display === 'none') return;
+
+        const outputSizeEl = document.getElementById('tk-output-size');
+        const outputTokens = outputSizeEl ? parseInt(outputSizeEl.value) : 500;
+        const tbody = document.getElementById('tk-compare-body');
+        if (!tbody) return;
+
+        tbody.innerHTML = Object.values(MODELS).map(m => {
+            const inCost = (inputTokens / 1_000_000) * m.inputPer1M;
+            const outCost = (outputTokens / 1_000_000) * m.outputPer1M;
+            const total = inCost + outCost;
+            const pct = Math.min((inputTokens / (m.contextK * 1000)) * 100, 100);
+            const pctColor = pct > 80 ? '#ef4444' : pct > 50 ? '#eab308' : '#22c55e';
+            return `<tr>
+                <td style="padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-primary);">${m.name}</td>
+                <td style="text-align:right;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-secondary);">${inputTokens.toLocaleString('pt-BR')}</td>
+                <td style="text-align:right;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-secondary);">${formatCost(inCost)}</td>
+                <td style="text-align:right;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-secondary);">${formatCost(outCost)}</td>
+                <td style="text-align:right;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--accent-3);font-weight:600;">${formatCost(total)}</td>
+                <td style="text-align:right;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.05);color:${pctColor};">${pct.toFixed(1)}%</td>
+            </tr>`;
+        }).join('');
+    }
+
+    textarea.addEventListener('input', updateStats);
+    modelSelect.addEventListener('change', updateStats);
+
+    // Pro features — activated when applyProFeatures() enables the signal input
+    setTimeout(() => {
+        const proInput = document.getElementById('tk-pro-enabled');
+        const proContent = document.getElementById('tk-pro-content');
+        if (!proInput || proInput.disabled || !proContent) return;
+
+        proContent.style.display = 'block';
+
+        const outputSizeEl = document.getElementById('tk-output-size');
+        if (outputSizeEl) {
+            outputSizeEl.addEventListener('change', () => updateCompareTable(estimateTokens(textarea.value)));
+        }
+
+        const exportBtn = document.getElementById('tk-export-csv');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => {
+                const batchInput = document.getElementById('tk-batch');
+                const rawBatch = batchInput ? batchInput.value : '';
+                const prompts = rawBatch.split('---').map(p => p.trim()).filter(p => p);
+
+                if (!prompts.length) {
+                    showToast('Insira prompts separados por ---');
+                    return;
+                }
+
+                const model = MODELS[modelSelect.value];
+                const outputTokens = outputSizeEl ? parseInt(outputSizeEl.value) : 500;
+
+                const rows = [['Prompt', 'Modelo', 'Tokens', 'Custo Input ($)', 'Custo Output ($)', 'Total ($)', '% Contexto']];
+                prompts.forEach((prompt, i) => {
+                    const tokens = estimateTokens(prompt);
+                    const inCost = (tokens / 1_000_000) * model.inputPer1M;
+                    const outCost = (outputTokens / 1_000_000) * model.outputPer1M;
+                    const total = inCost + outCost;
+                    const pct = ((tokens / (model.contextK * 1000)) * 100).toFixed(2);
+                    rows.push([
+                        `Prompt ${i + 1}`,
+                        model.name,
+                        tokens,
+                        inCost.toFixed(6),
+                        outCost.toFixed(6),
+                        total.toFixed(6),
+                        pct + '%'
+                    ]);
+                });
+
+                const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'nextools-tokens.csv';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('CSV exportado com sucesso!');
+            });
+        }
+
+        // Refresh table when user types
+        textarea.addEventListener('input', () => updateCompareTable(estimateTokens(textarea.value)));
+    }, 600);
+
+    // Initial render
+    updateStats();
 }
