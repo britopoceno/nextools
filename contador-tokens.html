@@ -268,8 +268,27 @@
             <h2>Como a estimativa de tokens funciona?</h2>
             <p>Nossa ferramenta usa uma heurística calibrada para texto em português: <strong>tokens ≈ palavras × 1,35 + caracteres × 0,05</strong>. Essa fórmula resulta em um erro médio de ~4% em comparação com os tokenizadores reais dos modelos — precisa o suficiente para planejamento de custo e verificação de janela de contexto, sem depender de APIs externas ou bibliotecas pesadas.</p>
 
+            <h2>Como os LLMs tokenizam texto?</h2>
+            <p>Modelos de linguagem modernos usam um algoritmo chamado BPE (Byte Pair Encoding) ou suas variações para dividir o texto em tokens. Em vez de dividir por palavras ou caracteres, o BPE aprende as sequências de caracteres mais frequentes no corpus de treinamento e cria tokens para elas. Por isso:</p>
+            <ul>
+                <li>Palavras comuns em inglês como "the", "is", "and" frequentemente são um único token.</li>
+                <li>Palavras raras ou técnicas podem ser divididas em múltiplos tokens — por exemplo, "tokenização" pode virar 3-4 tokens.</li>
+                <li>Espaços e pontuação também consomem tokens.</li>
+                <li>Código-fonte tem densidade de tokens diferente de texto em linguagem natural — operadores, indentação e símbolos especiais afetam a contagem.</li>
+            </ul>
+
             <h2>Como comparar custo entre modelos?</h2>
             <p>O custo varia enormemente entre modelos. O Llama 4 Scout ($0.08/M) e o DeepSeek V3.1 ($0.14/M) são os mais econômicos, enquanto o Claude Opus 4.6 e o o3 dominam em raciocínio complexo. O Gemini 2.5 Flash oferece o melhor custo-benefício do Google. Para tarefas simples (classificação, extração, resumo curto), os modelos econômicos têm desempenho equivalente. Com o plano Pro, você vê a tabela comparativa completa de todos os 18 modelos simultaneamente — ideal para escolher o modelo certo para cada tarefa.</p>
+
+            <h2>Estratégias para reduzir o custo de tokens</h2>
+            <p>Otimizar o uso de tokens pode reduzir custos de API em 30-60% sem perda de qualidade:</p>
+            <ul>
+                <li><strong>Prompts mais diretos:</strong> elimine frases de cortesia ("Por favor, poderia...") e instrua diretamente ("Resuma em 3 pontos:"). Cada token poupado no prompt também reduz o tamanho da janela de contexto ocupada.</li>
+                <li><strong>System prompts concisos:</strong> system prompts longos são cobrados em toda chamada. Revise-os periodicamente para remover instruções redundantes.</li>
+                <li><strong>Few-shot vs. zero-shot:</strong> exemplos no prompt ajudam a qualidade, mas custam tokens. Para tarefas simples, tente zero-shot primeiro.</li>
+                <li><strong>Modelo certo para cada tarefa:</strong> use modelos menores (Haiku, Flash, mini) para tarefas de triagem ou classificação; reserve os modelos maiores para raciocínio complexo.</li>
+                <li><strong>Caching de prompt:</strong> APIs como Claude e OpenAI oferecem cache de prefixos de prompt, que cobra tokens em cache a 10% do preço normal.</li>
+            </ul>
         </div>
     </section>
 
@@ -284,7 +303,8 @@
             <div class="footer-links">
                 <a href="index.html#tools">Ferramentas</a>
                 <a href="index.html#pricing">Preços</a>
-                <a href="index.html#faq">FAQ</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="contato.html">Contato</a>
                 <a href="privacidade.html">Privacidade</a>
                 <a href="termos.html">Termos</a>
             </div>

@@ -280,18 +280,32 @@
     <section class="content-section">
         <div class="container">
             <h2>O que é um Diff Checker?</h2>
-            <p>Um diff checker (ou comparador de texto) é uma ferramenta que compara dois textos linha por linha e destaca as diferenças: linhas adicionadas, removidas e alteradas. O nome "diff" vem do comando Unix de mesmo nome, usado há décadas por desenvolvedores para comparar versões de código-fonte.</p>
+            <p>Um diff checker (ou comparador de texto) é uma ferramenta que compara dois textos linha por linha e destaca as diferenças: linhas adicionadas, removidas e alteradas. O nome "diff" vem do comando Unix de mesmo nome, usado há décadas por desenvolvedores para comparar versões de código-fonte. Hoje, o conceito é amplamente usado além do código — para comparar documentos, contratos, configurações e qualquer texto que passa por revisões.</p>
 
             <h2>Quando usar o Diff Checker?</h2>
             <ul>
-                <li><strong>Revisar pull requests</strong> — compare o código antes e depois de uma mudança.</li>
+                <li><strong>Revisar pull requests</strong> — compare o código antes e depois de uma mudança sem abrir o GitHub.</li>
                 <li><strong>Comparar rascunhos</strong> — encontre diferenças entre versões de um documento, e-mail ou artigo.</li>
                 <li><strong>Validar configurações</strong> — verifique o que mudou em arquivos JSON, YAML ou .env.</li>
                 <li><strong>Detectar alterações inesperadas</strong> — identifique modificações em contratos, laudos ou textos legais.</li>
+                <li><strong>Revisão de traduções</strong> — compare a versão original com a traduzida para garantir que nenhum trecho foi omitido.</li>
+                <li><strong>Depuração de dados</strong> — compare saídas de API ou logs entre dois momentos para identificar mudanças de comportamento.</li>
             </ul>
 
             <h2>Como funciona o algoritmo de diff?</h2>
             <p>Nossa ferramenta implementa um algoritmo baseado em <strong>LCS (Longest Common Subsequence)</strong> com otimização de prefixo e sufixo comuns — a mesma abordagem usada por ferramentas como Git e GNU diff. O resultado é um diff preciso que minimiza o número de operações (adições e remoções) necessárias para transformar o texto original no texto modificado. Com o plano Pro, o diff também é calculado a nível de <strong>caractere</strong> dentro de cada linha, destacando exatamente qual trecho foi alterado.</p>
+
+            <h2>Tipos de diff e como interpretá-los</h2>
+            <p>Existem diferentes formas de visualizar um diff:</p>
+            <ul>
+                <li><strong>Diff unificado (unified diff):</strong> formato usado pelo Git, mostra contexto ao redor das mudanças com "+" para adições e "-" para remoções. Ideal para revisão de código.</li>
+                <li><strong>Diff lado a lado (side-by-side):</strong> exibe os dois textos em colunas paralelas com as diferenças destacadas na posição correspondente. Mais intuitivo para documentos longos.</li>
+                <li><strong>Diff inline:</strong> mostra o texto com as adições e remoções intercaladas na mesma coluna, frequentemente com cores diferentes. É o formato padrão do GitHub para revisão de PRs.</li>
+            </ul>
+            <p>Nossa ferramenta usa o formato lado a lado com destaque colorido — verde para linhas adicionadas (presentes apenas no segundo texto), vermelho para linhas removidas (presentes apenas no primeiro texto). Linhas sem diferença são exibidas normalmente.</p>
+
+            <h2>Diff de código vs. diff de texto</h2>
+            <p>O algoritmo de diff funciona de forma idêntica para código e texto, mas a interpretação dos resultados é diferente. Em código, uma mudança de indentação pode representar uma refatoração significativa, mesmo que o texto da linha seja quase o mesmo. Em contratos ou documentos legais, a remoção de uma vírgula pode alterar completamente o sentido de uma cláusula. Use o diff sempre com atenção ao contexto do que está sendo comparado.</p>
         </div>
     </section>
 
@@ -306,7 +320,8 @@
             <div class="footer-links">
                 <a href="index.html#tools">Ferramentas</a>
                 <a href="index.html#pricing">Preços</a>
-                <a href="index.html#faq">FAQ</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="contato.html">Contato</a>
                 <a href="privacidade.html">Privacidade</a>
                 <a href="termos.html">Termos</a>
             </div>

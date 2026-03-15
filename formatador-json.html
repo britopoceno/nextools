@@ -140,8 +140,27 @@
                 <li><strong>Minificar:</strong> remove todos os espaços e quebras de linha desnecessários, reduzindo o tamanho do payload para produção.</li>
             </ul>
 
+            <h2>Erros comuns de sintaxe JSON</h2>
+            <p>JSON tem uma sintaxe rígida que confunde até desenvolvedores experientes. Os erros mais frequentes são:</p>
+            <ul>
+                <li><strong>Vírgula no último elemento:</strong> <code>{"a": 1, "b": 2,}</code> é inválido — JSON não aceita trailing comma, diferente de JavaScript.</li>
+                <li><strong>Chaves sem aspas:</strong> <code>{nome: "João"}</code> é inválido — todas as chaves devem estar entre aspas duplas.</li>
+                <li><strong>Aspas simples:</strong> JSON exige aspas duplas. <code>{'nome': 'João'}</code> é inválido.</li>
+                <li><strong>Comentários:</strong> JSON não suporta comentários <code>// ou /* */</code> — use JSONC (JSON with Comments) se precisar de comentários.</li>
+                <li><strong>Valores undefined:</strong> <code>undefined</code> não é um tipo válido em JSON. Use <code>null</code> para valores ausentes.</li>
+                <li><strong>Números com zeros à esquerda:</strong> <code>{"cep": 01310100}</code> é inválido — use string para CEPs e telefones.</li>
+            </ul>
+
+            <h2>JSON vs outros formatos de dados</h2>
+            <p>Quando escolher JSON em vez de outras alternativas?</p>
+            <ul>
+                <li><strong>JSON vs XML:</strong> JSON é mais compacto, mais fácil de ler por humanos e nativo em JavaScript. XML é mais adequado quando você precisa de atributos, namespaces ou documentos com comentários.</li>
+                <li><strong>JSON vs YAML:</strong> YAML é mais legível para humanos e suporta comentários, ideal para arquivos de configuração. JSON é mais seguro (sem ambiguidades de indentação) e universalmente suportado por linguagens.</li>
+                <li><strong>JSON vs CSV:</strong> CSV é melhor para dados tabulares simples e compatibilidade com Excel. JSON é melhor para dados hierárquicos com estrutura variável.</li>
+            </ul>
+
             <h2>100% privado — seus dados não saem do navegador</h2>
-            <p>Todo o processamento acontece localmente no seu navegador. Nenhum dado é enviado para servidores externos — seus JSONs com tokens, chaves de API ou dados de usuários estão completamente seguros.</p>
+            <p>Todo o processamento acontece localmente no seu navegador. Nenhum dado é enviado para servidores externos — seus JSONs com tokens, chaves de API ou dados de usuários estão completamente seguros. Não registramos nenhum conteúdo que você formata, valida ou minifica.</p>
         </div>
     </section>
 
@@ -156,7 +175,8 @@
             <div class="footer-links">
                 <a href="index.html#tools">Ferramentas</a>
                 <a href="index.html#pricing">Preços</a>
-                <a href="index.html#faq">FAQ</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="contato.html">Contato</a>
                 <a href="privacidade.html">Privacidade</a>
                 <a href="termos.html">Termos</a>
             </div>

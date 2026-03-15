@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato — Fale com a NexTools | NexTools</title>
+    <meta name="description"
+        content="Entre em contato com a NexTools. Sugestões de novas ferramentas, reporte de bugs, dúvidas sobre o plano Pro ou parcerias — estamos aqui para ajudar.">
+    <meta name="author" content="NexTools">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://nextools.com.br/contato.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contato — Fale com a NexTools">
+    <meta property="og:description" content="Sugestões, bugs, dúvidas ou parcerias — entre em contato com a equipe NexTools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nextools.com.br/contato.html">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contato NexTools",
+        "url": "https://nextools.com.br/contato.html",
+        "description": "Página de contato da NexTools — sugestões, bugs e suporte.",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "NexTools",
+            "url": "https://nextools.com.br",
+            "email": "contato@nextools.com.br"
+        }
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5750194644744805"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: border-color 0.25s ease;
+        }
+
+        .contact-card:hover {
+            border-color: rgba(129, 140, 248, 0.3);
+        }
+
+        .contact-card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .contact-card h3 {
+            color: var(--text-primary);
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .contact-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .contact-email-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-3);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .contact-email-link:hover {
+            opacity: 0.8;
+        }
+
+        .faq-contact {
+            margin-top: 60px;
+        }
+
+        .faq-contact h2 {
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html#tools" class="nav-link">Ferramentas</a>
+                <a href="index.html#pricing" class="nav-link">Preços</a>
+                <a href="sobre.html" class="nav-link">Sobre</a>
+                <a href="contato.html" class="nav-link">Contato</a>
+                <a href="index.html#pricing" class="btn btn-primary btn-sm mobile-only">Upgrade Pro ✨</a>
+            </nav>
+            <div class="header-actions">
+                <a href="index.html#pricing" class="btn btn-primary btn-sm desktop-only">Upgrade Pro ✨</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="container breadcrumb">
+        <a href="index.html">← Voltar para a Página Inicial</a>
+    </div>
+
+    <!-- ===== CONTENT ===== -->
+    <section class="content-section" style="padding-top: 40px;">
+        <div class="container">
+            <h1 style="color: var(--text-primary); font-family: var(--font-display); font-size: 2rem; margin-bottom: 12px;">Fale com a <span class="gradient-text">NexTools</span></h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 8px;">Lemos todas as mensagens. Geralmente respondemos em até 48 horas úteis.</p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <span class="contact-card-icon">💡</span>
+                    <h3>Sugestões de ferramentas</h3>
+                    <p>Sentiu falta de uma ferramenta que não temos? Adoramos sugestões da comunidade — várias das nossas ferramentas atuais foram pedidas por usuários. Nos conte o que você precisaria e o caso de uso.</p>
+                    <a href="mailto:contato@nextools.com.br?subject=Sugestão de ferramenta" class="contact-email-link">
+                        → contato@nextools.com.br
+                    </a>
+                </div>
+
+                <div class="contact-card">
+                    <span class="contact-card-icon">🐛</span>
+                    <h3>Reporte de bugs</h3>
+                    <p>Encontrou algo que não funciona como esperado? Descreva o que aconteceu, qual ferramenta estava usando e o seu navegador/sistema operacional. Corrigimos bugs reportados com prioridade.</p>
+                    <a href="mailto:contato@nextools.com.br?subject=Bug report" class="contact-email-link">
+                        → contato@nextools.com.br
+                    </a>
+                </div>
+
+                <div class="contact-card">
+                    <span class="contact-card-icon">💳</span>
+                    <h3>Suporte ao plano Pro</h3>
+                    <p>Problemas com cobrança, cancelamento, acesso às funcionalidades Pro ou dúvidas sobre o que está incluso no plano? Assinantes Pro têm prioridade na fila de suporte.</p>
+                    <a href="mailto:suporte@nextools.com.br?subject=Suporte Pro" class="contact-email-link">
+                        → suporte@nextools.com.br
+                    </a>
+                </div>
+
+                <div class="contact-card">
+                    <span class="contact-card-icon">🤝</span>
+                    <h3>Parcerias e imprensa</h3>
+                    <p>Quer mencionar a NexTools em um artigo, incluir nossas ferramentas em um projeto educacional ou propor alguma forma de colaboração? Nos envie uma mensagem e avaliaremos com cuidado.</p>
+                    <a href="mailto:contato@nextools.com.br?subject=Parceria" class="contact-email-link">
+                        → contato@nextools.com.br
+                    </a>
+                </div>
+            </div>
+
+            <div class="faq-contact">
+                <h2>Perguntas frequentes de suporte</h2>
+
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary class="faq-question">Uma ferramenta parou de funcionar no meu navegador. O que faço?</summary>
+                        <p class="faq-answer">Primeiro, tente recarregar a página com Ctrl+Shift+R (cache limpo). Se o problema persistir, verifique se está usando um navegador atualizado (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+). Extensões de navegador como bloqueadores de anúncios agressivos podem interferir com algumas funções — tente desativá-los temporariamente. Se nada resolver, reporte o bug para <a href="mailto:contato@nextools.com.br" style="color: var(--accent-3);">contato@nextools.com.br</a> com o nome da ferramenta e o erro que aparece no console (F12 → Console).</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">Como cancelo minha assinatura Pro?</summary>
+                        <p class="faq-answer">Acesse o seu <a href="dashboard.html" style="color: var(--accent-3);">dashboard</a>, clique em "Gerenciar Assinatura" e selecione "Cancelar". O cancelamento é imediato e você mantém o acesso Pro até o final do período já pago. Não há multas ou burocracia.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">Meus dados estão seguros nas ferramentas da NexTools?</summary>
+                        <p class="faq-answer">Sim. Com exceção do sistema de autenticação (login/cadastro), todo o processamento das ferramentas acontece localmente no seu navegador — nenhum texto, senha, QR Code ou JSON é enviado para nossos servidores. Consulte nossa <a href="privacidade.html" style="color: var(--accent-3);">Política de Privacidade</a> para mais detalhes.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">Em quanto tempo recebo uma resposta?</summary>
+                        <p class="faq-answer">Geralmente respondemos em até 48 horas úteis. Usuários do plano Pro têm prioridade e costumam receber resposta em até 24 horas. Mensagens enviadas em fins de semana ou feriados são respondidas no próximo dia útil.</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AD BANNER ===== -->
+    <div class="ad-slot" id="ad-middle">
+        <div class="ad-placeholder">
+            <span>Anúncio — <a href="https://www.google.com/adsense" target="_blank">Google AdSense</a></span>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Nex<span class="logo-accent">Tools</span></span>
+                <p class="footer-tagline">Ferramentas online rápidas e poderosas.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#tools">Ferramentas</a>
+                <a href="index.html#pricing">Preços</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="contato.html">Contato</a>
+                <a href="privacidade.html">Privacidade</a>
+                <a href="termos.html">Termos</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 NexTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script type="module" src="auth.js"></script>
+</body>
+
+</html>
